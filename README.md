@@ -34,7 +34,7 @@ library fills that gap: patterns designed for glacial sedimentology, keyed to
 plain-name aliases, and **parametric** so a facies is a family you tune (clast
 density, lamina spacing, stipple density) rather than one frozen tile.
 
-## Facies (18)
+## Facies (19)
 
 | Code | Alias | Group | |
 |------|-------|-------|--|
@@ -46,6 +46,7 @@ density, lamina spacing, stipple density) rather than one frozen tile.
 | `SGp` | planar cross-beds | glaciofluvial | sand & gravel, planar foresets |
 | `SGt` | trough cross-beds | glaciofluvial | sand & gravel, festoon sets |
 | `Sr` | ripple lamination | glaciofluvial | climbing-ripple cross-lamination |
+| `Sx` | cross-laminated sand | glaciofluvial | laminated sand with cross-bed marks |
 | `Sh` | laminated sand | glaciofluvial | horizontal plane beds |
 | `Sm` | massive sand | glaciofluvial | massive / faintly graded |
 | `Fl` | rhythmite / varve | glaciolacustrine | laminated silt & clay couplets |
@@ -65,6 +66,7 @@ they're drawn as placed features over a fill:
 - `mpl.dropstone(ax, x, y, r)` — ice-rafted clast deflecting the laminae (use over `Fl`/`Fm`)
 - `mpl.boulder_pavement(ax, y, x0, x1)` — a clast line marking a subglacial pavement / lag
 - `mpl.erosion_contact(ax, y, x0, x1)` — a scalloped erosional surface
+- `mpl.deformation(ax, x0, x1, y0, y1)` — convolute / recumbent folds drawn *over* any fill (a deformed zone; the `Fd` tile is the stand-alone version)
 
 ## Quickstart
 
@@ -128,7 +130,8 @@ generator in `glacial_patterns/patterns.py` and rebuilding updates every asset.
 
 - **Ornament shows process.** Foresets are tangential, gravel imbricated,
   ripples asymmetric and climbing — directional strokes encode flow and form,
-  the way field-manual lithology ornaments do.
+  the way field-manual lithology ornaments do. Palaeoflow is drawn **right to
+  left** by convention (one `FLOW` constant in `patterns.py` flips it).
 - **Organic, not CAD-regular.** Irregularity is a *deterministic function of
   position*, so clast size, lamina thickness, and waviness vary hand-drawn-style
   while the repeating tile stays seamless.
