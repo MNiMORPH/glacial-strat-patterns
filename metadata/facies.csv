@@ -1,0 +1,14 @@
+code,alias,group,description,svg,png
+Dmm,till (massive),diamicton,"Diamicton, matrix-supported, massive - subglacial/lodgement till",svg/Dmm.svg,png/Dmm.png
+Dms,stratified diamicton,diamicton,"Diamicton, matrix-supported, stratified - melt-out / waterlain till",svg/Dms.svg,png/Dms.png
+Dcm,clast-rich diamicton,diamicton,"Diamicton, clast-supported, massive - winnowed / coarse till",svg/Dcm.svg,png/Dcm.png
+Gh,gravel,glaciofluvial,"Gravel, clast-supported, horizontally bedded - outwash / channel lag",svg/Gh.svg,png/Gh.png
+SGp,planar cross-beds,glaciofluvial,"Sand & gravel, planar cross-bedded - outwash bar foresets",svg/SGp.svg,png/SGp.png
+SGt,trough cross-beds,glaciofluvial,"Sand & gravel, trough cross-bedded - dune migration in outwash channels",svg/SGt.svg,png/SGt.png
+Sr,ripple lamination,glaciofluvial,"Sand, ripple / climbing-ripple cross-lamination - waning flow",svg/Sr.svg,png/Sr.png
+Sm,massive sand,glaciofluvial,"Sand, massive or faintly graded",svg/Sm.svg,png/Sm.png
+Fl,rhythmite / varve,glaciolacustrine,Laminated silt & clay rhythmites (varves) - distal glaciolacustrine,svg/Fl.svg,png/Fl.png
+Fm,massive mud,glaciolacustrine,Massive silt & clay - suspension settling; hosts dropstones,svg/Fm.svg,png/Fm.png
+Em,loess,eolian,Massive eolian silt (loess),svg/Em.svg,png/Em.png
+P,peat / organic,organic,Peat and organic-rich mud - bog / fen,svg/P.svg,png/P.png
+R,bedrock,bedrock,Undifferentiated bedrock / substrate,svg/R.svg,png/R.png

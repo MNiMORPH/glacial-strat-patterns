@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+<defs><clipPath id="clip84"><rect width="84" height="84"/></clipPath><pattern id="pat_Dms" patternUnits="userSpaceOnUse" width="84" height="84"><rect width="84" height="84" fill="white"/><line x1="0" y1="14" x2="84" y2="14" stroke="#888" stroke-width="0.7" stroke-dasharray="7 5"/><line x1="0" y1="34" x2="84" y2="34" stroke="#888" stroke-width="0.7" stroke-dasharray="7 5"/><line x1="0" y1="54" x2="84" y2="54" stroke="#888" stroke-width="0.7" stroke-dasharray="7 5"/><line x1="0" y1="74" x2="84" y2="74" stroke="#888" stroke-width="0.7" stroke-dasharray="7 5"/><g transform="translate(-84 -84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(-84 0)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(-84 84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(0 -84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(0 0)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(0 84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(84 -84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(84 0)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g>
+<g transform="translate(84 84)"><ellipse cx="11.5" cy="68.4" rx="7.8" ry="4.8" transform="rotate(-1 11.5 68.4)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="36.4,82.1 31.7,85.5 25.8,84.7 27.4,78.7 32.8,76.8" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="81.3" cy="48.2" rx="5.2" ry="3.2" transform="rotate(-6 81.3 48.2)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="41.4,32.0 35.6,37.2 27.4,36.8 29.0,28.5 36.0,25.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="52.9" cy="14.3" rx="7.6" ry="4.7" transform="rotate(5 52.9 14.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<ellipse cx="12.9" cy="4.3" rx="6.1" ry="3.8" transform="rotate(6 12.9 4.3)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="49.2,73.0 45.2,77.1 39.2,77.2 39.9,71.1 44.9,68.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
+<polygon points="68.9,80.0 63.9,84.8 56.7,84.7 57.8,77.3 63.9,74.3" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/><circle cx="60.4" cy="44.4" r="1.5" fill="#333"/>
+<circle cx="24.3" cy="83.4" r="1.5" fill="#333"/>
+<circle cx="65.2" cy="72.5" r="1.5" fill="#333"/>
+<circle cx="60.1" cy="74.5" r="1.5" fill="#333"/>
+<circle cx="43.4" cy="72.1" r="1.5" fill="#333"/>
+<circle cx="2.0" cy="18.5" r="1.5" fill="#333"/>
+<circle cx="34.4" cy="72.8" r="1.5" fill="#333"/>
+<circle cx="3.5" cy="10.7" r="1.5" fill="#333"/></g></pattern></defs>
+<rect width="120" height="120" fill="url(#pat_Dms)" stroke="black" stroke-width="1"/>
+</svg>
