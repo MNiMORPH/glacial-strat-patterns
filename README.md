@@ -21,7 +21,7 @@ library fills that gap: patterns designed for glacial sedimentology, keyed to
 plain-name aliases, and **parametric** so a facies is a family you tune (clast
 density, lamina spacing, stipple density) rather than one frozen tile.
 
-## Facies (v0.1)
+## Facies (18)
 
 | Code | Alias | Group | |
 |------|-------|-------|--|
@@ -29,18 +29,29 @@ density, lamina spacing, stipple density) rather than one frozen tile.
 | `Dms` | stratified diamicton | diamicton | matrix-supported, stratified — melt-out / waterlain |
 | `Dcm` | clast-rich diamicton | diamicton | clast-supported, massive |
 | `Gh` | gravel | glaciofluvial | clast-supported, horizontally bedded |
+| `Gms` | matrix-supported gravel | glaciofluvial | debris-flow / ice-marginal diamict |
 | `SGp` | planar cross-beds | glaciofluvial | sand & gravel, planar foresets |
 | `SGt` | trough cross-beds | glaciofluvial | sand & gravel, festoon sets |
 | `Sr` | ripple lamination | glaciofluvial | climbing-ripple cross-lamination |
+| `Sh` | laminated sand | glaciofluvial | horizontal plane beds |
 | `Sm` | massive sand | glaciofluvial | massive / faintly graded |
 | `Fl` | rhythmite / varve | glaciolacustrine | laminated silt & clay couplets |
 | `Fm` | massive mud | glaciolacustrine | structureless silt & clay |
+| `Cdm` | colluvium (soliflucted) | colluvial | diamict; clasts aligned down-slope |
+| `Fd` | deformed / folded | deformation | glaciotectonite / soft-sediment folds |
+| `SGc` | ice-contact (collapsed) | deformation | bedded sand faulted into grabens |
 | `Em` | loess | eolian | massive eolian silt |
 | `P` | peat / organic | organic | bog / fen |
 | `R` | bedrock | bedrock | undifferentiated substrate |
 
-Dropstones are a *placed feature* (`mpl.dropstone`), drawn over an `Fl`/`Fm`
-fill — because ice-rafted clasts sit *in* the laminae, they aren't a tile.
+### Placed features (not tiles)
+
+Some glacial elements sit *in* the sediment rather than filling an interval, so
+they're drawn as placed features over a fill:
+
+- `mpl.dropstone(ax, x, y, r)` — ice-rafted clast deflecting the laminae (use over `Fl`/`Fm`)
+- `mpl.boulder_pavement(ax, y, x0, x1)` — a clast line marking a subglacial pavement / lag
+- `mpl.erosion_contact(ax, y, x0, x1)` — a scalloped erosional surface
 
 ## Quickstart
 
@@ -87,9 +98,10 @@ generator in `glacial_patterns/patterns.py` and rebuilding updates every asset.
 
 ## Roadmap
 
-More facies (soliflucted colluvium, ice-contact/collapse structures,
-glaciotectonic deformation, boulder pavements), optional colour variants,
-a matplotlib hatch export, and per-facies parameter presets.
+Optional colour variants per facies, a matplotlib hatch export, per-facies
+parameter presets, and further ornaments (striated/faceted-clast markers,
+till fabric arrows, iceberg-turbate). Contributions of regional facies schemes
+welcome.
 
 ## Licence
 
