@@ -72,6 +72,29 @@ def dropstone(ax, x, y, r, aspect=0.8, zorder=3):
         ax.plot(xs, ys, color="#555", linewidth=1.1, zorder=zorder - 0.05)
 
 
+def deformation(ax, x0, x1, y0, y1, nlam=7, color="#333", lw=1.0, zorder=3):
+    """Overlay convolute / recumbent fold laminae across an interval, *over* an
+    existing fill - a deformed zone drawn atop any facies (per Ridge, 1997).
+    Laminae are folded into overturned, down-current-verging closures."""
+    lo, hi = sorted((y0, y1))
+    W = x1 - x0
+    xs = np.linspace(x0, x1, 240)
+    ph = (xs - x0) / W * 2 * np.pi * 3           # 3 fold trains across
+    # asymmetric, overturned profile (steep down-current limb)
+    prof = np.sin(ph) + 0.35 * np.sin(2 * ph - 0.6)
+    amp = 0.11 * (hi - lo)
+    for i in range(nlam):
+        yb = lo + (i + 0.5) / nlam * (hi - lo)
+        ax.plot(xs, yb + amp * prof * (0.8 + 0.25 * np.sin(i * 1.3)),
+                color=color, linewidth=lw, zorder=zorder, solid_capstyle="round")
+    # recumbent hook closures
+    for fx, fy in ((0.28, 0.4), (0.6, 0.62), (0.82, 0.3)):
+        cx, cy, s = x0 + fx * W, lo + fy * (hi - lo), 0.06 * W
+        t = np.linspace(0, 1.8 * np.pi, 40)
+        ax.plot(cx - s * (1 - t / 6) * np.cos(t), cy + s * (1 - t / 6) * np.sin(t),
+                color=color, linewidth=lw, zorder=zorder)
+
+
 def boulder_pavement(ax, y, x0, x1, r=0.055, zorder=3):
     """A line of clasts along a surface at depth ``y`` - a boulder pavement /
     lag, marking a subglacial erosion surface or deflation lag."""
