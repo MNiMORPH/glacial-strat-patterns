@@ -18,7 +18,7 @@ from .catalog import resolve, BY_CODE
 # code -> best-effort built-in matplotlib hatch (approximate; see module docs)
 HATCH = {
     "Dmm": "o",     "Dms": "o-",   "Dcm": "OO",   "Gh": "oo",   "Gms": "o.",
-    "SGp": "//",    "SGt": "//\\\\", "Sr": "//",   "Sh": "--",   "Sm": "..",
+    "SGp": "//",    "SGt": "//\\\\", "Sr": "//",   "Sx": "-/",   "Sh": "--",   "Sm": "..",
     "Fl": "-",      "Fm": ".",     "Cdm": "o/",   "Fd": "xx",   "SGc": "|-",
     "Em": "...",    "P": "---",    "R": "++",
 }
