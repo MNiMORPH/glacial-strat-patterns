@@ -70,3 +70,23 @@ def dropstone(ax, x, y, r, aspect=0.8, zorder=3):
         xs = np.linspace(x - 3 * r, x + 3 * r, 30)
         ys = y + dy + dy * 0.9 * np.exp(-((xs - x) / (1.3 * r)) ** 2)
         ax.plot(xs, ys, color="#555", linewidth=1.1, zorder=zorder - 0.05)
+
+
+def boulder_pavement(ax, y, x0, x1, r=0.055, zorder=3):
+    """A line of clasts along a surface at depth ``y`` - a boulder pavement /
+    lag, marking a subglacial erosion surface or deflation lag."""
+    n = max(3, int((x1 - x0) / (2.1 * r)))
+    xs = np.linspace(x0 + r, x1 - r, n)
+    for i, cx in enumerate(xs):
+        rr = r * (0.8 + 0.4 * ((i * 37) % 5) / 4)
+        ax.add_patch(Ellipse((cx, y), 2 * rr, 2 * rr * 0.62, facecolor="#cfcfcf",
+                             edgecolor="#111", linewidth=1.1, zorder=zorder))
+
+
+def erosion_contact(ax, y, x0, x1, amp=None, zorder=4):
+    """A scalloped erosional contact line across a column at depth ``y``."""
+    amp = amp if amp is not None else 0.02 * (x1 - x0)
+    xs = np.linspace(x0, x1, 120)
+    n = max(2, round((x1 - x0) / (4 * (amp + 1e-9))))
+    ys = y - amp * np.abs(np.sin(np.pi * n * (xs - x0) / (x1 - x0)))
+    ax.plot(xs, ys, color="black", linewidth=1.6, zorder=zorder)
