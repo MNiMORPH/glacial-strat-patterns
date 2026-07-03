@@ -70,6 +70,16 @@
   "png": "png/Sr.png"
  },
  {
+  "code": "Sx",
+  "alias": "cross-laminated sand",
+  "group": "glaciofluvial",
+  "description": "Sand, laminated with sparse cross-bed marks - cross-bedding present",
+  "process": "dune/ripple migration; cross-bedding present",
+  "hatch": "-/",
+  "svg": "svg/Sx.svg",
+  "png": "png/Sx.png"
+ },
+ {
   "code": "Sh",
   "alias": "laminated sand",
   "group": "glaciofluvial",

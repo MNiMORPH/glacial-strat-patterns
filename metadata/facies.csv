@@ -6,6 +6,7 @@ Gh,gravel,glaciofluvial,"Gravel, clast-supported, horizontally bedded - outwash 
 SGp,planar cross-beds,glaciofluvial,"Sand & gravel, planar cross-bedded - outwash bar foresets",dune migration; foresets dip down-current,//,svg/SGp.svg,png/SGp.png
 SGt,trough cross-beds,glaciofluvial,"Sand & gravel, trough cross-bedded - dune migration in outwash channels",3-D dune migration; festoon scour-and-fill,//\\,svg/SGt.svg,png/SGt.png
 Sr,ripple lamination,glaciofluvial,"Sand, ripple / climbing-ripple cross-lamination - waning flow",ripple migration with aggradation (climbing),//,svg/Sr.svg,png/Sr.png
+Sx,cross-laminated sand,glaciofluvial,"Sand, laminated with sparse cross-bed marks - cross-bedding present",dune/ripple migration; cross-bedding present,-/,svg/Sx.svg,png/Sx.png
 Sh,laminated sand,glaciofluvial,"Sand, horizontally laminated - upper-stage plane beds",upper-stage plane beds; high flow power,--,svg/Sh.svg,png/Sh.png
 Sm,massive sand,glaciofluvial,"Sand, massive or faintly graded",rapid deposition or bioturbation; structureless,..,svg/Sm.svg,png/Sm.png
 Gms,matrix-supported gravel,glaciofluvial,"Gravel, matrix-supported - debris-flow / ice-marginal diamict",en-masse debris flow; unsorted,o.,svg/Gms.svg,png/Gms.png
