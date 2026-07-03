@@ -95,6 +95,32 @@ def deformation(ax, x0, x1, y0, y1, nlam=7, color="#333", lw=1.0, zorder=3):
                 color=color, linewidth=lw, zorder=zorder)
 
 
+def flame(ax, x, y, s=0.12, color="#333", lw=1.4, zorder=3):
+    """Flame / water-escape structure (dewatering of rapidly loaded sediment)."""
+    t = np.linspace(0, 1, 24)
+    ax.plot(x + s * 0.28 * np.sin(np.pi * 1.6 * t), y + s * 1.4 * t,
+            color=color, linewidth=lw, zorder=zorder, solid_capstyle="round")
+    ax.plot(x + s * 0.5 + s * 0.22 * np.sin(np.pi * 1.6 * t + 0.8), y + s * 1.1 * t,
+            color=color, linewidth=lw * 0.85, zorder=zorder, solid_capstyle="round")
+
+
+def mud_rip_up(ax, x, y, s=0.05, color="#222", zorder=3):
+    """A mud rip-up clast: a small dark crescent."""
+    th = np.linspace(0.32 * np.pi, 1.68 * np.pi, 24)
+    ax.plot(x + s * np.cos(th), y + s * 0.62 * np.sin(th), color=color,
+            linewidth=3, zorder=zorder, solid_capstyle="round")
+
+
+def pebble_lag(ax, y, x0, x1, r=0.045, imbricate=False, angle=25, zorder=3):
+    """A pebble lag / stringer along a surface; ``imbricate=True`` tilts the
+    clasts into an overlapping imbricate fabric (a-axes dip up-current)."""
+    n = max(3, int((x1 - x0) / (1.5 * r)))
+    for cx in np.linspace(x0 + r, x1 - r, n):
+        ax.add_patch(Ellipse((cx, y), 2 * r, r, angle=(angle if imbricate else 0),
+                             facecolor="none", edgecolor="#222", linewidth=1.1,
+                             zorder=zorder))
+
+
 def boulder_pavement(ax, y, x0, x1, r=0.055, zorder=3):
     """A line of clasts along a surface at depth ``y`` - a boulder pavement /
     lag, marking a subglacial erosion surface or deflation lag."""
