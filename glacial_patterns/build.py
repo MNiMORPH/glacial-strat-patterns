@@ -65,7 +65,8 @@ def build(px=120, raster_w=240):
         w.writerows(rows)
     contact_sheet(rows)
     inkscape_palette(rows)
-    print(f"built {len(rows)} facies -> svg/, png/, metadata/, inkscape/")
+    explanatory_plate()
+    print(f"built {len(rows)} facies -> svg/, png/, metadata/, inkscape/, plate")
 
 
 def contact_sheet(rows, path=None, ncols=6):
@@ -147,6 +148,73 @@ def inkscape_palette(rows, path=None, ncols=6):
            + "\n".join(body) + "\n</svg>\n")
     open(path, "w").write(svg)
     rasterize(path, path.replace(".svg", ".png"), min(1800, tw * 2))
+
+
+# process annotations: (code, title, caption, arrow) where arrow is one of
+# 'flow-left' 'flow-right' 'climb' 'settle' 'fabric' or None. Kept geologically
+# honest - foreset/ripple dip = transport; imbricate a-axes dip up-current.
+# caption lines separated by '|' (each rendered on its own row)
+EXPLAIN = [
+    ("Gh",  "Imbrication",       "disc clasts tilted;|a-axes dip up-current", "fabric"),
+    ("SGp", "Planar cross-beds", "foresets dip down-current,|tangential to the base", "flow-left"),
+    ("SGt", "Trough cross-beds", "festoon scours:|migrating 3-D dunes", "flow-right"),
+    ("Sr",  "Climbing ripples",  "migrate + aggrade;|ripples climb up-current", "climb"),
+    ("Fl",  "Rhythmites",        "graded seasonal couplets;|suspension settling", "settle"),
+    ("Dmm", "Massive till",      "poorly sorted, matrix-supported;|no sorting, no fabric", None),
+]
+
+_ARROW = {                                 # (x1,y1,x2,y2) in a 0..W,0..H panel
+    "flow-left":  lambda W, H: (W * 0.72, H * 0.30, W * 0.28, H * 0.60),
+    "flow-right": lambda W, H: (W * 0.28, H * 0.30, W * 0.72, H * 0.40),
+    "climb":      lambda W, H: (W * 0.30, H * 0.74, W * 0.66, H * 0.28),
+    "settle":     lambda W, H: (W * 0.50, H * 0.22, W * 0.50, H * 0.74),
+    "fabric":     lambda W, H: (W * 0.30, H * 0.60, W * 0.70, H * 0.40),
+}
+
+
+def explanatory_plate(rows_unused=None, path=None, ncols=3):
+    """A teaching plate: key facies with a process arrow and a caption, showing
+    what each ornament records. Highlights the pattern-and-process design."""
+    path = path or os.path.join(ROOT, "explanatory_plate.svg")
+    W, H, gx, gy, top, caph = 210, 150, 26, 66, 60, 46
+    cellh = H + caph
+    tiles, defs, body = set(), [], []
+    defs.append('<marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" '
+                'orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#b5271f"/></marker>')
+    for i, (code, title, caption, arrow) in enumerate(EXPLAIN):
+        fn = next(f for c, f, *_ in FACIES if c == code)
+        tile, d = pattern_defs(code, fn)
+        tiles.add(tile)
+        defs.append(d)
+        col, row = i % ncols, i // ncols
+        x, y = gx + col * (W + gx), top + row * (cellh + gy)
+        body.append(f'<rect x="{x}" y="{y}" width="{W}" height="{H}" '
+                    f'fill="url(#pat_{code})" stroke="black" stroke-width="1.5"/>')
+        if arrow:
+            ax1, ay1, ax2, ay2 = _ARROW[arrow](W, H)
+            body.append(f'<line x1="{x+ax1:.0f}" y1="{y+ay1:.0f}" x2="{x+ax2:.0f}" '
+                        f'y2="{y+ay2:.0f}" stroke="#b5271f" stroke-width="3.2" '
+                        f'marker-end="url(#ah)" opacity="0.9"/>')
+        body.append(f'<text x="{x}" y="{y+H+20}" font-family="sans-serif" '
+                    f'font-size="15" font-weight="bold">{code} · {title}</text>')
+        for li, line in enumerate(caption.split("|")):
+            body.append(f'<text x="{x}" y="{y+H+37+li*15}" font-family="sans-serif" '
+                        f'font-size="11.5" fill="#333">{line}</text>')
+    clips = "".join(f'<clipPath id="clip{t}"><rect width="{t}" height="{t}"/></clipPath>'
+                    for t in sorted(tiles))
+    nrows = (len(EXPLAIN) + ncols - 1) // ncols
+    tw = gx + ncols * (W + gx)
+    th = top + nrows * (cellh + gy)
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{tw}" height="{th}" '
+           f'viewBox="0 0 {tw} {th}">\n<defs>{clips}{"".join(defs)}</defs>\n'
+           f'<rect width="100%" height="100%" fill="white"/>\n'
+           f'<text x="{gx}" y="34" font-family="sans-serif" font-size="20" '
+           f'font-weight="bold">Reading the ornament: pattern and process</text>\n'
+           f'<text x="{gx}" y="52" font-family="sans-serif" font-size="12" '
+           f'fill="#b5271f">red arrows show the process direction the strokes record</text>\n'
+           + "\n".join(body) + "\n</svg>\n")
+    open(path, "w").write(svg)
+    rasterize(path, path.replace(".svg", ".png"), min(1600, tw * 2))
 
 
 if __name__ == "__main__":
