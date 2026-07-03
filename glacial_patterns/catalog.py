@@ -46,7 +46,31 @@ FACIES = [
      "Undifferentiated bedrock / substrate"),
 ]
 
-BY_CODE = {c: dict(code=c, fn=fn, alias=al, group=g, description=d)
+# What each facies *records* - the depositional process its ornament encodes.
+# Machine-readable companion to the explanatory plate.
+PROCESS = {
+    "Dmm": "subglacial deposition; poorly sorted, no fabric",
+    "Dms": "melt-out / waterlain till; weak sub-horizontal fabric",
+    "Dcm": "winnowed or coarse subglacial / debris deposit",
+    "Gh":  "bed-load gravel; imbrication records palaeoflow",
+    "Gms": "en-masse debris flow; unsorted",
+    "SGp": "dune migration; foresets dip down-current",
+    "SGt": "3-D dune migration; festoon scour-and-fill",
+    "Sr":  "ripple migration with aggradation (climbing)",
+    "Sh":  "upper-stage plane beds; high flow power",
+    "Sm":  "rapid deposition or bioturbation; structureless",
+    "Fl":  "seasonal suspension settling (varves)",
+    "Fm":  "quiet-water suspension settling",
+    "Cdm": "slope creep / solifluction; down-slope fabric",
+    "Fd":  "glaciotectonic / soft-sediment deformation",
+    "SGc": "ice-contact collapse on buried-ice melt-out",
+    "Em":  "eolian silt fallout (loess)",
+    "P":   "in-situ organic accumulation (bog / fen)",
+    "R":   "substrate / basement",
+}
+
+BY_CODE = {c: dict(code=c, fn=fn, alias=al, group=g, description=d,
+                   process=PROCESS.get(c, ""))
            for c, fn, al, g, d in FACIES}
 
 ALIAS_TO_CODE = {al: c for c, fn, al, g, d in FACIES}
