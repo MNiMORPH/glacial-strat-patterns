@@ -9,7 +9,7 @@ import json
 import os
 import subprocess
 
-from .catalog import FACIES
+from .catalog import FACIES, PROCESS
 from .hatch import HATCH
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,12 +55,12 @@ def build(px=120, raster_w=240):
         open(sp, "w").write(svg)
         rasterize(sp, pp, raster_w)
         rows.append(dict(code=code, alias=alias, group=group, description=desc,
-                         hatch=HATCH.get(code, ""),
+                         process=PROCESS.get(code, ""), hatch=HATCH.get(code, ""),
                          svg=f"svg/{code}.svg", png=f"png/{code}.png"))
     json.dump(rows, open(os.path.join(META_DIR, "facies.json"), "w"), indent=1)
     with open(os.path.join(META_DIR, "facies.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["code", "alias", "group", "description",
-                                          "hatch", "svg", "png"])
+                                          "process", "hatch", "svg", "png"])
         w.writeheader()
         w.writerows(rows)
     contact_sheet(rows)
