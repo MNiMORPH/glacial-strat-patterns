@@ -134,12 +134,18 @@ def gravel_clast(tile=84, seed=3):                         # Gh (clast-supported
 
 
 # --------------------------------------------------------------------- sand ---
-def _stipple(tile, n, seed, rmin, rmax):
+def _stipple(tile, n, seed, rmin, rmax, fill="#3a3a3a"):
     """Irregular stipple: random positions and varied grain sizes (not a grid)."""
     r = _rng(seed)
     return "\n".join(
         f'<circle cx="{next(r)*tile:.1f}" cy="{next(r)*tile:.1f}" '
-        f'r="{rmin + (rmax-rmin)*next(r):.2f}" fill="#3a3a3a"/>' for _ in range(n))
+        f'r="{rmin + (rmax-rmin)*next(r):.2f}" fill="{fill}"/>' for _ in range(n))
+
+
+def _sand_ground(tile, seed, n=55):
+    """A light sand stipple ground, so 'cross-bedded/ripple sand' reads as sand
+    even where the structure is sparse (per FGDC 609-611)."""
+    return wrap9(_stipple(tile, n, seed + 7, 0.5, 0.9, fill="#9a9a9a"), tile)
 
 
 def sand_massive(tile=44, n=34, seed=4):                   # Sm
@@ -151,7 +157,7 @@ def sand_planar_xbed(tile=96, seth=32, seed=1):            # SGp
     """Planar cross-beds that show the process: foresets sweep down-current
     (FLOW direction) and flatten *tangentially* into the lower bounding surface
     (grainflow down a migrating dune's lee face). Uniform dip -> palaeoflow."""
-    els = []
+    els = [_sand_ground(tile, seed)]       # sand lithology reads through
     run = seth * 1.7 * FLOW                # signed down-current reach
     for y0 in range(0, tile, seth):
         yb = y0 + seth
@@ -171,7 +177,7 @@ def sand_trough_xbed(tile=96, seth=32, seed=2):            # SGt (festoon)
     """Trough cross-beds: scoop-shaped erosional sets filled with nested,
     asymmetric foresets that climb out down-current - the signature of 3-D
     (sinuous-crested) dunes migrating and scouring."""
-    els = []
+    els = [_sand_ground(tile, seed)]       # sand lithology reads through
     span = tile // 2                       # trough width (divides tile)
     for si, y0 in enumerate(range(0, tile, seth)):
         off = (si % 2) * (span // 2)       # stagger troughs between cosets
@@ -216,6 +222,7 @@ def sand_ripple(tile=52, seed=6):                          # Sr (ripple x-lam)
     """Ripple cross-lamination: climbing trains of small down-current foreset
     sets - the standard field-log ripple ornament."""
     els = []
+    els.append(_sand_ground(tile, seed))   # sand lithology reads through
     for row, y0 in enumerate(range(10, tile + 10, 11)):
         climb = (row * 6) % 16             # up-current step per set = climbing
         for cx in range(-4 + climb, tile + 16, 16):
@@ -226,8 +233,9 @@ def sand_ripple(tile=52, seed=6):                          # Sr (ripple x-lam)
 def sand_xlam(tile=64, seed=15):                           # Sx (x-bedded sand)
     """Laminated sand carrying sparse cross-bed marks - 'sand, cross-bedding
     present', the common shorthand where full foresets aren't drawn."""
-    els = [f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#777" '
-           f'stroke-width="0.7"/>' for y in range(6, tile, 7)]
+    els = [_sand_ground(tile, seed)]       # sand lithology reads through
+    els += [f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#777" '
+            f'stroke-width="0.7"/>' for y in range(6, tile, 7)]
     r = _rng(seed)
     for _ in range(6):
         cx, cy = 8 + next(r) * (tile - 18), 9 + next(r) * (tile - 16)
