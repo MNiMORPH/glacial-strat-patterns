@@ -4,6 +4,7 @@
   "alias": "till (massive)",
   "group": "diamicton",
   "description": "Diamicton, matrix-supported, massive - subglacial/lodgement till",
+  "process": "subglacial deposition; poorly sorted, no fabric",
   "hatch": "o",
   "svg": "svg/Dmm.svg",
   "png": "png/Dmm.png"
@@ -13,6 +14,7 @@
   "alias": "stratified diamicton",
   "group": "diamicton",
   "description": "Diamicton, matrix-supported, stratified - melt-out / waterlain till",
+  "process": "melt-out / waterlain till; weak sub-horizontal fabric",
   "hatch": "o-",
   "svg": "svg/Dms.svg",
   "png": "png/Dms.png"
@@ -22,6 +24,7 @@
   "alias": "clast-rich diamicton",
   "group": "diamicton",
   "description": "Diamicton, clast-supported, massive - winnowed / coarse till",
+  "process": "winnowed or coarse subglacial / debris deposit",
   "hatch": "OO",
   "svg": "svg/Dcm.svg",
   "png": "png/Dcm.png"
@@ -31,6 +34,7 @@
   "alias": "gravel",
   "group": "glaciofluvial",
   "description": "Gravel, clast-supported, horizontally bedded - outwash / channel lag",
+  "process": "bed-load gravel; imbrication records palaeoflow",
   "hatch": "oo",
   "svg": "svg/Gh.svg",
   "png": "png/Gh.png"
@@ -40,6 +44,7 @@
   "alias": "planar cross-beds",
   "group": "glaciofluvial",
   "description": "Sand & gravel, planar cross-bedded - outwash bar foresets",
+  "process": "dune migration; foresets dip down-current",
   "hatch": "//",
   "svg": "svg/SGp.svg",
   "png": "png/SGp.png"
@@ -49,6 +54,7 @@
   "alias": "trough cross-beds",
   "group": "glaciofluvial",
   "description": "Sand & gravel, trough cross-bedded - dune migration in outwash channels",
+  "process": "3-D dune migration; festoon scour-and-fill",
   "hatch": "//\\\\",
   "svg": "svg/SGt.svg",
   "png": "png/SGt.png"
@@ -58,6 +64,7 @@
   "alias": "ripple lamination",
   "group": "glaciofluvial",
   "description": "Sand, ripple / climbing-ripple cross-lamination - waning flow",
+  "process": "ripple migration with aggradation (climbing)",
   "hatch": "//",
   "svg": "svg/Sr.svg",
   "png": "png/Sr.png"
@@ -67,6 +74,7 @@
   "alias": "laminated sand",
   "group": "glaciofluvial",
   "description": "Sand, horizontally laminated - upper-stage plane beds",
+  "process": "upper-stage plane beds; high flow power",
   "hatch": "--",
   "svg": "svg/Sh.svg",
   "png": "png/Sh.png"
@@ -76,6 +84,7 @@
   "alias": "massive sand",
   "group": "glaciofluvial",
   "description": "Sand, massive or faintly graded",
+  "process": "rapid deposition or bioturbation; structureless",
   "hatch": "..",
   "svg": "svg/Sm.svg",
   "png": "png/Sm.png"
@@ -85,6 +94,7 @@
   "alias": "matrix-supported gravel",
   "group": "glaciofluvial",
   "description": "Gravel, matrix-supported - debris-flow / ice-marginal diamict",
+  "process": "en-masse debris flow; unsorted",
   "hatch": "o.",
   "svg": "svg/Gms.svg",
   "png": "png/Gms.png"
@@ -94,6 +104,7 @@
   "alias": "colluvium (soliflucted)",
   "group": "colluvial",
   "description": "Soliflucted colluvial diamict - clasts aligned down-slope",
+  "process": "slope creep / solifluction; down-slope fabric",
   "hatch": "o/",
   "svg": "svg/Cdm.svg",
   "png": "png/Cdm.png"
@@ -103,6 +114,7 @@
   "alias": "deformed / folded",
   "group": "deformation",
   "description": "Folded or contorted laminae - glaciotectonite / soft-sediment deformation",
+  "process": "glaciotectonic / soft-sediment deformation",
   "hatch": "xx",
   "svg": "svg/Fd.svg",
   "png": "png/Fd.png"
@@ -112,6 +124,7 @@
   "alias": "ice-contact (collapsed)",
   "group": "deformation",
   "description": "Bedded sand faulted into grabens - ice-contact collapse structures",
+  "process": "ice-contact collapse on buried-ice melt-out",
   "hatch": "|-",
   "svg": "svg/SGc.svg",
   "png": "png/SGc.png"
@@ -121,6 +134,7 @@
   "alias": "rhythmite / varve",
   "group": "glaciolacustrine",
   "description": "Laminated silt & clay rhythmites (varves) - distal glaciolacustrine",
+  "process": "seasonal suspension settling (varves)",
   "hatch": "-",
   "svg": "svg/Fl.svg",
   "png": "png/Fl.png"
@@ -130,6 +144,7 @@
   "alias": "massive mud",
   "group": "glaciolacustrine",
   "description": "Massive silt & clay - suspension settling; hosts dropstones",
+  "process": "quiet-water suspension settling",
   "hatch": ".",
   "svg": "svg/Fm.svg",
   "png": "png/Fm.png"
@@ -139,6 +154,7 @@
   "alias": "loess",
   "group": "eolian",
   "description": "Massive eolian silt (loess)",
+  "process": "eolian silt fallout (loess)",
   "hatch": "...",
   "svg": "svg/Em.svg",
   "png": "png/Em.png"
@@ -148,6 +164,7 @@
   "alias": "peat / organic",
   "group": "organic",
   "description": "Peat and organic-rich mud - bog / fen",
+  "process": "in-situ organic accumulation (bog / fen)",
   "hatch": "---",
   "svg": "svg/P.svg",
   "png": "png/P.png"
@@ -157,6 +174,7 @@
   "alias": "bedrock",
   "group": "bedrock",
   "description": "Undifferentiated bedrock / substrate",
+  "process": "substrate / basement",
   "hatch": "++",
   "svg": "svg/R.svg",
   "png": "png/R.png"
