@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glacial-strat-patterns"
+version = "0.1.0"
+description = "Tileable fill patterns for glacial / Quaternary stratigraphic columns (SVG source; matplotlib helper)"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Andrew D. Wickert" }]
+keywords = ["geology", "glacial", "Quaternary", "stratigraphy", "lithofacies",
+            "stratigraphic column", "SVG", "patterns", "matplotlib"]
+dependencies = ["numpy", "matplotlib", "pillow"]
+
+[project.urls]
+Homepage = "https://github.com/MNiMORPH/glacial-strat-patterns"
+
+[tool.setuptools]
+packages = ["glacial_patterns"]
+
+# Regenerating the SVG/PNG tiles additionally requires the `inkscape` CLI.
