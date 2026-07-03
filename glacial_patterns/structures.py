@@ -145,6 +145,67 @@ def folds(ax, x0, x1, y0, y1, ntrains=3, color="#333", lw=1.0, zorder=3):
     _clip(ax, arts, x0, x1, lo, hi)
 
 
+def cross_lamination(ax, x0, x1, y0, y1, color="#555", lw=0.8, zorder=2):
+    """Small-scale cross-lamination: rows of little tangential foreset sets
+    (the 'cross-bedding present' shorthand at ripple scale)."""
+    lo, hi, h = _band(y0, y1)
+    W = x1 - x0
+    s = min(W / 7.0, h / 4.0)
+    arts = []
+    t = np.linspace(0, 1, 12)
+    for row in range(max(2, int(h / (1.7 * s)))):
+        yb = lo + (row + 0.6) * h / max(2, int(h / (1.7 * s)))
+        for x in np.arange(x0 + s, x1, 2.4 * s):
+            fx = x + FLOW * s * t
+            fy = yb - s * 0.8 * (t ** 1.5)
+            arts.append(ax.plot(fx, fy, color=color, lw=lw, zorder=zorder)[0])
+    _clip(ax, arts, x0, x1, lo, hi)
+
+
+def collapse(ax, x0, x1, y0, y1, nfaults=2, color="#555", lw=0.9, zorder=2):
+    """Ice-contact collapse: bedded sand dropped along small normal faults
+    (grabens) as buried ice melts out."""
+    lo, hi, h = _band(y0, y1)
+    W = x1 - x0
+    arts = []
+    fxs = [x0 + W * (i + 1) / (nfaults + 1) for i in range(nfaults)]
+    for y in np.linspace(lo + h / 8, hi - h / 8, 6):
+        seg_x = [x0] + fxs + [x1]
+        for a, b in zip(seg_x[:-1], seg_x[1:]):
+            drop = 0.05 * h if (seg_x.index(a) % 2) else 0.0
+            arts.append(ax.plot([a, b], [y + drop, y + drop], color=color,
+                                lw=lw, zorder=zorder)[0])
+    for fx in fxs:
+        arts.append(ax.plot([fx, fx], [lo, hi], color="#222", lw=1.1,
+                            zorder=zorder)[0])
+    _clip(ax, arts, x0, x1, lo, hi)
+
+
+def plate(path="structures_plate.png", dpi=150):
+    """Render a labelled plate of the structure overlays over a neutral fill."""
+    import matplotlib.pyplot as plt
+    items = [("cross-bedding", cross_bedding), ("trough cross-bedding", trough_cross_bedding),
+             ("cross-lamination", cross_lamination), ("climbing ripples", climbing_ripples),
+             ("wave ripples", wave_ripples), ("planar lamination", planar_lamination),
+             ("folds (deformed band)", folds), ("collapse", collapse),
+             ("dispersed clasts", dispersed_clasts)]
+    ncols = 3
+    nrows = (len(items) + ncols - 1) // ncols
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 2.4, nrows * 1.9))
+    for ax, (name, fn) in zip(axes.flat, items):
+        ax.add_patch(Rectangle((0, 0), 1, 1, facecolor="#f2f2f2", edgecolor="black"))
+        fn(ax, 0.03, 0.97, 0.95, 0.05)
+        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.set_xticks([]); ax.set_yticks([])
+        ax.set_title(name, fontsize=9)
+    for ax in axes.flat[len(items):]:
+        ax.axis("off")
+    fig.suptitle("Sedimentary structures (overlays, drawn over a lithology)",
+                 fontsize=11, y=1.0)
+    fig.tight_layout()
+    fig.savefig(path, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+
 def dispersed_clasts(ax, x0, x1, y0, y1, n=14, seed=0, zorder=3):
     """Scattered / dispersed clasts (lonestones, ice-rafted debris) of varied
     size - drawn over a finer fill."""
