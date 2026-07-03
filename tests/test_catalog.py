@@ -10,7 +10,7 @@ import os
 
 import pytest
 
-from glacial_patterns import FACIES, BY_CODE, resolve
+from glacial_patterns import FACIES, BY_CODE, PROCESS, resolve
 from glacial_patterns.build import swatch_svg
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,6 +44,12 @@ def test_swatch_svg_is_wellformed(code):
     svg = swatch_svg(code, BY_CODE[code]["fn"])
     assert svg.startswith("<?xml") or svg.lstrip().startswith("<svg")
     assert f"pat_{code}" in svg and svg.count("<pattern") == 1
+
+
+def test_process_covers_every_facies():
+    assert set(PROCESS) == set(BY_CODE)
+    assert all(PROCESS[c].strip() for c in PROCESS)
+    assert resolve("Dmm")["process"]
 
 
 def test_resolve_by_code_and_alias():
