@@ -40,54 +40,14 @@
   "png": "png/Gh.png"
  },
  {
-  "code": "SGp",
-  "alias": "planar cross-beds",
-  "group": "glaciofluvial",
-  "description": "Sand & gravel, planar cross-bedded - outwash bar foresets",
-  "process": "dune migration; foresets dip down-current",
-  "hatch": "//",
-  "svg": "svg/SGp.svg",
-  "png": "png/SGp.png"
- },
- {
-  "code": "SGt",
-  "alias": "trough cross-beds",
-  "group": "glaciofluvial",
-  "description": "Sand & gravel, trough cross-bedded - dune migration in outwash channels",
-  "process": "3-D dune migration; festoon scour-and-fill",
-  "hatch": "//\\\\",
-  "svg": "svg/SGt.svg",
-  "png": "png/SGt.png"
- },
- {
   "code": "Sr",
-  "alias": "ripple lamination",
+  "alias": "ripple-laminated sand",
   "group": "glaciofluvial",
-  "description": "Sand, ripple / climbing-ripple cross-lamination - waning flow",
+  "description": "Sand, ripple / climbing-ripple cross-laminated - waning flow",
   "process": "ripple migration with aggradation (climbing)",
   "hatch": "//",
   "svg": "svg/Sr.svg",
   "png": "png/Sr.png"
- },
- {
-  "code": "Sx",
-  "alias": "cross-laminated sand",
-  "group": "glaciofluvial",
-  "description": "Sand, laminated with sparse cross-bed marks - cross-bedding present",
-  "process": "dune/ripple migration; cross-bedding present",
-  "hatch": "-/",
-  "svg": "svg/Sx.svg",
-  "png": "png/Sx.png"
- },
- {
-  "code": "Sh",
-  "alias": "laminated sand",
-  "group": "glaciofluvial",
-  "description": "Sand, horizontally laminated - upper-stage plane beds",
-  "process": "upper-stage plane beds; high flow power",
-  "hatch": "--",
-  "svg": "svg/Sh.svg",
-  "png": "png/Sh.png"
  },
  {
   "code": "Sm",
@@ -118,26 +78,6 @@
   "hatch": "o/",
   "svg": "svg/Cdm.svg",
   "png": "png/Cdm.png"
- },
- {
-  "code": "Fd",
-  "alias": "deformed / folded",
-  "group": "deformation",
-  "description": "Folded or contorted laminae - glaciotectonite / soft-sediment deformation",
-  "process": "glaciotectonic / soft-sediment deformation",
-  "hatch": "xx",
-  "svg": "svg/Fd.svg",
-  "png": "png/Fd.png"
- },
- {
-  "code": "SGc",
-  "alias": "ice-contact (collapsed)",
-  "group": "deformation",
-  "description": "Bedded sand faulted into grabens - ice-contact collapse structures",
-  "process": "ice-contact collapse on buried-ice melt-out",
-  "hatch": "|-",
-  "svg": "svg/SGc.svg",
-  "png": "png/SGc.png"
  },
  {
   "code": "Fl",
