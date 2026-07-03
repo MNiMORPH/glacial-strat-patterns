@@ -66,7 +66,10 @@ def build(px=120, raster_w=240):
     contact_sheet(rows)
     inkscape_palette(rows)
     explanatory_plate()
-    print(f"built {len(rows)} facies -> svg/, png/, metadata/, inkscape/, plate")
+    from . import structures
+    structures.plate(os.path.join(ROOT, "structures_plate.png"))
+    print(f"built {len(rows)} lithologies -> svg/, png/, metadata/, inkscape/, "
+          f"plates")
 
 
 def contact_sheet(rows, path=None, ncols=6):
@@ -154,12 +157,12 @@ def inkscape_palette(rows, path=None, ncols=6):
 # No directional arrows - they invite error (e.g. imbrication sense); the
 # ornament itself carries the direction.
 EXPLAIN = [
-    ("Gh",  "Imbrication",       "disc clasts tilted into|an imbricate fabric"),
-    ("SGp", "Planar cross-beds", "foresets sweep down-current,|tangential to the base"),
-    ("SGt", "Trough cross-beds", "festoon scours:|migrating 3-D dunes"),
-    ("Sr",  "Climbing ripples",  "asymmetric ripples that|migrate and aggrade"),
-    ("Fl",  "Rhythmites",        "graded seasonal couplets;|suspension settling"),
-    ("Dmm", "Massive till",      "poorly sorted, matrix-supported;|no sorting, no fabric"),
+    ("Dmm", "Massive till",       "poorly sorted, matrix-supported;|no sorting, no fabric"),
+    ("Gh",  "Imbricated gravel",  "disc clasts tilted into|an imbricate fabric"),
+    ("Gms", "Debris-flow gravel", "matrix-supported;|en-masse emplacement"),
+    ("Sr",  "Ripple-laminated sand", "asymmetric ripples that|migrate and aggrade"),
+    ("Fl",  "Rhythmites / varves", "graded seasonal couplets;|suspension settling"),
+    ("Cdm", "Colluvium",          "clasts aligned|down-slope (solifluction)"),
 ]
 
 
