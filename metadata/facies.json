@@ -56,12 +56,52 @@
   "png": "png/Sr.png"
  },
  {
+  "code": "Sh",
+  "alias": "laminated sand",
+  "group": "glaciofluvial",
+  "description": "Sand, horizontally laminated - upper-stage plane beds",
+  "svg": "svg/Sh.svg",
+  "png": "png/Sh.png"
+ },
+ {
   "code": "Sm",
   "alias": "massive sand",
   "group": "glaciofluvial",
   "description": "Sand, massive or faintly graded",
   "svg": "svg/Sm.svg",
   "png": "png/Sm.png"
+ },
+ {
+  "code": "Gms",
+  "alias": "matrix-supported gravel",
+  "group": "glaciofluvial",
+  "description": "Gravel, matrix-supported - debris-flow / ice-marginal diamict",
+  "svg": "svg/Gms.svg",
+  "png": "png/Gms.png"
+ },
+ {
+  "code": "Cdm",
+  "alias": "colluvium (soliflucted)",
+  "group": "colluvial",
+  "description": "Soliflucted colluvial diamict - clasts aligned down-slope",
+  "svg": "svg/Cdm.svg",
+  "png": "png/Cdm.png"
+ },
+ {
+  "code": "Fd",
+  "alias": "deformed / folded",
+  "group": "deformation",
+  "description": "Folded or contorted laminae - glaciotectonite / soft-sediment deformation",
+  "svg": "svg/Fd.svg",
+  "png": "png/Fd.png"
+ },
+ {
+  "code": "SGc",
+  "alias": "ice-contact (collapsed)",
+  "group": "deformation",
+  "description": "Bedded sand faulted into grabens - ice-contact collapse structures",
+  "svg": "svg/SGc.svg",
+  "png": "png/SGc.png"
  },
  {
   "code": "Fl",

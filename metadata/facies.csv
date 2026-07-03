@@ -6,7 +6,12 @@ Gh,gravel,glaciofluvial,"Gravel, clast-supported, horizontally bedded - outwash 
 SGp,planar cross-beds,glaciofluvial,"Sand & gravel, planar cross-bedded - outwash bar foresets",svg/SGp.svg,png/SGp.png
 SGt,trough cross-beds,glaciofluvial,"Sand & gravel, trough cross-bedded - dune migration in outwash channels",svg/SGt.svg,png/SGt.png
 Sr,ripple lamination,glaciofluvial,"Sand, ripple / climbing-ripple cross-lamination - waning flow",svg/Sr.svg,png/Sr.png
+Sh,laminated sand,glaciofluvial,"Sand, horizontally laminated - upper-stage plane beds",svg/Sh.svg,png/Sh.png
 Sm,massive sand,glaciofluvial,"Sand, massive or faintly graded",svg/Sm.svg,png/Sm.png
+Gms,matrix-supported gravel,glaciofluvial,"Gravel, matrix-supported - debris-flow / ice-marginal diamict",svg/Gms.svg,png/Gms.png
+Cdm,colluvium (soliflucted),colluvial,Soliflucted colluvial diamict - clasts aligned down-slope,svg/Cdm.svg,png/Cdm.png
+Fd,deformed / folded,deformation,Folded or contorted laminae - glaciotectonite / soft-sediment deformation,svg/Fd.svg,png/Fd.png
+SGc,ice-contact (collapsed),deformation,Bedded sand faulted into grabens - ice-contact collapse structures,svg/SGc.svg,png/SGc.png
 Fl,rhythmite / varve,glaciolacustrine,Laminated silt & clay rhythmites (varves) - distal glaciolacustrine,svg/Fl.svg,png/Fl.png
 Fm,massive mud,glaciolacustrine,Massive silt & clay - suspension settling; hosts dropstones,svg/Fm.svg,png/Fm.png
 Em,loess,eolian,Massive eolian silt (loess),svg/Em.svg,png/Em.png
