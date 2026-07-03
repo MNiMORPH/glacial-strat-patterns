@@ -193,9 +193,10 @@ def sand_trough_xbed(tile=96, seth=32, seed=2):            # SGt (festoon)
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
-# Flow convention: FLOW = -1 draws transport right-to-left (down-current = -x),
-# the usual field-log convention. Foreset/ripple marks and imbrication all use it.
-FLOW = -1
+# Flow convention: FLOW = +1 draws transport left-to-right (down-current = +x),
+# the standard convention (USGS / general practice). Foreset & ripple marks and
+# clast imbrication all derive their direction from it.
+FLOW = 1
 
 
 def _xbed_mark(x, y, s, flow=FLOW):
