@@ -1,31 +1,36 @@
 """Worked example: a small glacial stratigraphic column.
 
 A classic deglacial succession (base to top): subglacial till -> ice-contact
-gravel -> glaciofluvial cross-bedded sand -> glaciolacustrine varves with
-dropstones -> loess -> peat. Run::
+gravel -> glaciofluvial sand (with cross-bed structures) -> glaciolacustrine
+varves with dropstones -> loess -> peat. Shows the two-class model: lithology
+*fills* with sedimentary-structure *overlays*. Run::
 
     python examples/example_column.py
 """
 import matplotlib.pyplot as plt
 
-from glacial_patterns import mpl, resolve
+from glacial_patterns import mpl, structures as st, resolve
 
-# (facies key, top depth, bottom depth) in metres, base of section at bottom
+# (lithology fill key, top depth, bottom depth) in metres
 UNITS = [
     ("Dmm", 8.0, 6.2),   # subglacial till
     ("Gh",  6.2, 5.3),   # ice-contact gravel
-    ("SGt", 5.3, 4.0),   # outwash, trough cross-bedded
-    ("SGp", 4.0, 3.2),   # outwash, planar cross-bedded
+    ("Sm",  5.3, 3.2),   # glaciofluvial sand (structures overlaid below)
     ("Fl",  3.2, 1.6),   # glaciolacustrine varves
     ("Em",  1.6, 0.6),   # loess
     ("P",   0.6, 0.0),   # peat
 ]
+LABELS = {"Dmm": 7.1, "Gh": 5.75, "Sm": 4.25, "Fl": 2.4, "Em": 1.1, "P": 0.3}
 
 fig, ax = plt.subplots(figsize=(3.4, 7))
 for code, top, bot in UNITS:
     mpl.column_fill(ax, code, 0, 1, top, bot, tile_width=0.5)
-    ax.text(1.12, (top + bot) / 2, f"{code}  {resolve(code)['alias']}",
+    ax.text(1.12, LABELS[code], f"{code}  {resolve(code)['alias']}",
             va="center", fontsize=9)
+
+# structure overlays on the sand (a different class, drawn over the lithology)
+st.trough_cross_bedding(ax, 0, 1, 5.3, 4.2)   # lower outwash: trough cross-beds
+st.cross_bedding(ax, 0, 1, 4.2, 3.2)          # upper outwash: planar cross-beds
 
 # placed features: a subglacial boulder pavement capping the till, an
 # erosional contact at the base of the lake beds, and ice-rafted dropstones

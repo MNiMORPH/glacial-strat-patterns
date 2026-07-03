@@ -10,7 +10,7 @@ from glacial_patterns import resolve
 from glacial_patterns.hatch import column_fill_hatch
 
 UNITS = [
-    ("Dmm", 8.0, 6.2), ("Gh", 6.2, 5.3), ("SGt", 5.3, 4.0), ("SGp", 4.0, 3.2),
+    ("Dmm", 8.0, 6.2), ("Gh", 6.2, 5.3), ("Sr", 5.3, 4.0), ("Sm", 4.0, 3.2),
     ("Fl", 3.2, 1.6), ("Em", 1.6, 0.6), ("P", 0.6, 0.0),
 ]
 

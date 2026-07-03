@@ -9,7 +9,8 @@ from glacial_patterns import structures as st
 
 OVERLAYS = [
     st.planar_lamination, st.cross_bedding, st.trough_cross_bedding,
-    st.climbing_ripples, st.wave_ripples, st.folds, st.dispersed_clasts,
+    st.cross_lamination, st.climbing_ripples, st.wave_ripples, st.folds,
+    st.collapse, st.dispersed_clasts,
 ]
 
 
