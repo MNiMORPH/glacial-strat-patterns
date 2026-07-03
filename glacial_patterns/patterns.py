@@ -187,6 +187,68 @@ def peat(tile=48, seed=10):                                # P (organic / peat)
     return tile, wrap9("\n".join(els), tile)
 
 
+# ------------------------------------------------------- more glaciofluvial ---
+def sand_laminated(tile=44, seed=15):                      # Sh (plane beds)
+    """Horizontally laminated sand: even, closely spaced plane-bed laminae."""
+    els = [f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#666" '
+           f'stroke-width="0.8"/>' for y in range(4, tile, 6)]
+    return tile, "\n".join(els)
+
+
+def gravel_matrix(tile=84, density=11, seed=17):           # Gms (debris flow)
+    """Matrix-supported gravel: floating clasts in a stippled sandy matrix."""
+    inner = (_fines(tile, 40, seed + 5, 0.9)
+             + _scatter(tile, density, 6, 10, seed, kinds=("ell", "ang", "ell")))
+    return tile, wrap9(inner, tile)
+
+
+# --------------------------------------------------- colluvial / deformation ---
+def colluvium(tile=80, density=10, seed=13):               # Cdm (soliflucted)
+    """Soliflucted colluvial diamict: elongate clasts aligned down-slope with
+    wavy solifluction partings."""
+    waves = []
+    for y0 in range(12, tile, 22):
+        pts = ",".join(f"{x} {y0 + 3*math.sin(x/tile*2*math.pi*2):.1f}"
+                       for x in range(0, tile + 4, 4))
+        waves.append(f'<polyline points="{pts}" fill="none" stroke="#999" '
+                     f'stroke-width="0.7"/>')
+    r = _rng(seed); cl = []
+    for _ in range(density):
+        cx, cy = next(r) * tile, next(r) * tile
+        cl.append(_clast(cx, cy, "ell", 6 + next(r) * 3, 28 + (next(r) - .5) * 16))
+    return tile, "".join(waves) + wrap9("".join(cl), tile)
+
+
+def deformed_fines(tile=64, seed=14):                      # Fd (glaciotectonite)
+    """Folded / contorted laminae - soft-sediment or glaciotectonic deformation."""
+    els = []
+    for y0 in range(0, tile, 7):
+        ph = 2 * math.pi * 2 * (y0 / tile)
+        amp = 3 + 1.5 * math.sin(y0)
+        pts = " ".join(f"{x},{y0 + amp*math.sin(x/tile*2*math.pi + ph):.1f}"
+                       for x in range(0, tile + 3, 3))
+        els.append(f'<polyline points="{pts}" fill="none" stroke="#555" '
+                   f'stroke-width="0.9"/>')
+    return tile, "\n".join(els)
+
+
+def collapsed_beds(tile=90, seed=16):                      # SGc (ice-contact)
+    """Ice-contact / collapse structures: bedded sand cut by small normal
+    faults that offset the laminae into grabens."""
+    def off(x):
+        return 4 if tile * 0.32 < x < tile * 0.68 else 0   # central graben
+    els = []
+    for y0 in range(6, tile, 8):
+        els.append(f'<path d="M 0 {y0} L {tile*0.32:.0f} {y0} '
+                   f'L {tile*0.32:.0f} {y0+4} L {tile*0.68:.0f} {y0+4} '
+                   f'L {tile*0.68:.0f} {y0} L {tile} {y0}" fill="none" '
+                   f'stroke="#666" stroke-width="0.8"/>')
+    for fx in (tile * 0.32, tile * 0.68):                  # fault planes
+        els.append(f'<line x1="{fx:.0f}" y1="0" x2="{fx:.0f}" y2="{tile}" '
+                   f'stroke="#222" stroke-width="1.1"/>')
+    return tile, "\n".join(els)
+
+
 # ------------------------------------------------------------------ bedrock ---
 def bedrock(tile=52, seed=12):                             # R (undifferentiated)
     r = _rng(seed); els = []
