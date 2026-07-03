@@ -34,6 +34,22 @@ def wrap9(inner, tile):
     return "\n".join(g)
 
 
+def _wiggle(seed, tile, amp):
+    """A gentle wander that is *periodic* over ``tile`` (sum of low harmonics
+    with integer frequencies), so a wavy line stays seamless when tiled. Gives
+    laminae/foresets an uneven, hand-drawn look instead of ruled-straight."""
+    r = _rng(seed)
+    comps = [(k, amp * (0.4 + 0.6 * next(r)) / k, next(r) * 2 * math.pi)
+             for k in (1, 2, 3)]
+    return lambda x: sum(a * math.sin(2 * math.pi * k * x / tile + ph)
+                         for k, a, ph in comps)
+
+
+def _wavy_polyline(y, tile, wig, stroke="#555", sw=0.8, step=3):
+    pts = " ".join(f"{x},{y + wig(x):.1f}" for x in range(0, tile + step, step))
+    return f'<polyline points="{pts}" fill="none" stroke="{stroke}" stroke-width="{sw}"/>'
+
+
 def _clast(cx, cy, kind, s, rot, fill="#d2d2d2", stroke="#222", sw=1.1):
     if kind == "dot":
         return f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{s:.1f}" fill="{stroke}"/>'
@@ -41,164 +57,223 @@ def _clast(cx, cy, kind, s, rot, fill="#d2d2d2", stroke="#222", sw=1.1):
         return (f'<ellipse cx="{cx:.1f}" cy="{cy:.1f}" rx="{s:.1f}" ry="{s*0.62:.1f}" '
                 f'transform="rotate({rot:.0f} {cx:.1f} {cy:.1f})" fill="{fill}" '
                 f'stroke="{stroke}" stroke-width="{sw}"/>')
-    pts = []                                    # angular clast: irregular pentagon
-    for i, r in enumerate((1.0, 0.72, 1.06, 0.8, 0.94)):
-        a = math.radians(rot + i * 72)
-        pts.append(f"{cx + s*r*math.cos(a):.1f},{cy + s*r*math.sin(a):.1f}")
+    # angular clast: irregular polygon, vertex count & radii jittered from
+    # position so no two clasts are the same shape
+    h = int(abs(cx * 131.1 + cy * 57.7)) % 1000
+    nv = 5 + (h % 3)                            # 5-7 vertices
+    pts = []
+    for i in range(nv):
+        rr = 0.68 + (((h >> i) ^ (i * 37)) % 100) / 100.0 * 0.5   # 0.68..1.18
+        a = math.radians(rot + i * 360.0 / nv)
+        pts.append(f"{cx + s*rr*math.cos(a):.1f},{cy + s*rr*math.sin(a):.1f}")
     return (f'<polygon points="{" ".join(pts)}" fill="{fill}" '
             f'stroke="{stroke}" stroke-width="{sw}"/>')
 
 
-def _scatter(tile, n, smin, smax, seed, kinds=("ang", "ell"), align=0.0):
-    """Scatter n clasts; ``align`` (0..1) flattens toward horizontal (fabric)."""
+def _scatter(tile, n, smin, smax, seed, kinds=("ang", "ell"), align=0.0, skew=2.0):
+    """Scatter n clasts of widely varied size (poorly-sorted diamict look).
+
+    ``skew`` biases the size distribution toward smaller clasts with occasional
+    large ones (skew>1); ``align`` (0..1) flattens clast long-axes toward
+    horizontal (a crude fabric). Larger clasts drawn last so they sit on top.
+    """
     r = _rng(seed)
-    els = []
+    grains = []
     for _ in range(n):
         cx, cy = next(r) * tile, next(r) * tile
-        s = smin + next(r) * (smax - smin)
+        s = smin + (smax - smin) * (next(r) ** skew)
         kind = kinds[int(next(r) * len(kinds)) % len(kinds)]
-        rot = (next(r) - 0.5) * 60 * (1 - align)   # align -> near-horizontal
-        els.append(_clast(cx, cy, kind, s, rot))
-    return "\n".join(els)
-
-
-def _fines(tile, n, seed, r_=1.0):
-    r = _rng(seed)
-    return "\n".join(
-        f'<circle cx="{next(r)*tile:.1f}" cy="{next(r)*tile:.1f}" r="{r_}" fill="#333"/>'
-        for _ in range(n))
+        rot = (next(r) - 0.5) * 70 * (1 - align)   # align -> near-horizontal
+        grains.append((s, _clast(cx, cy, kind, s, rot)))
+    grains.sort(key=lambda g: g[0])
+    return "\n".join(g for _, g in grains)
 
 
 # ---------------------------------------------------------------- diamicton ---
-def diamicton_massive(tile=84, density=8, seed=7):        # Dmm
-    inner = _scatter(tile, density, 5, 9, seed) + _fines(tile, density + 4, seed + 99, 1.7)
+def diamicton_massive(tile=88, density=13, seed=7):       # Dmm
+    """Massive till: poorly-sorted, matrix-supported - clasts of widely varied
+    size and random orientation (no fabric), floating in a stippled matrix."""
+    inner = (_stipple(tile, 18, seed + 99, 0.7, 1.4)
+             + _scatter(tile, density, 3, 12, seed, kinds=("ang", "ang", "ell"), skew=2.4))
     return tile, wrap9(inner, tile)
 
 
-def diamicton_stratified(tile=84, density=8, seed=5):      # Dms
-    partings = "".join(
-        f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#888" '
-        f'stroke-width="0.7" stroke-dasharray="7 5"/>' for y in range(14, tile, 20))
-    inner = _scatter(tile, density, 5, 8, seed, align=0.7) + _fines(tile, density, seed + 3, 1.5)
+def diamicton_stratified(tile=88, density=11, seed=5):     # Dms
+    """Stratified till: as massive, but with a weak sub-horizontal fabric and
+    faint discontinuous partings (waterlain / melt-out)."""
+    partings = "".join(_wavy_polyline(y, tile, _wiggle(seed + y, tile, 1.4),
+                                      "#8a8a8a", 0.6)
+                       for y in range(16, tile, 22))
+    inner = (_stipple(tile, 14, seed + 3, 0.7, 1.3)
+             + _scatter(tile, density, 3, 10, seed, kinds=("ang", "ell"),
+                        align=0.6, skew=2.2))
     return tile, partings + wrap9(inner, tile)
 
 
-def diamicton_clast(tile=84, density=15, seed=11):         # Dcm
-    inner = _scatter(tile, density, 6, 11, seed, kinds=("ang", "ell", "ang"))
+def diamicton_clast(tile=88, density=20, seed=11):         # Dcm
+    """Clast-supported diamict: densely packed, varied clasts, little matrix."""
+    inner = _scatter(tile, density, 5, 12, seed, kinds=("ang", "ell", "ang"), skew=1.4)
     return tile, wrap9(inner, tile)
 
 
 # ------------------------------------------------------------------- gravel ---
 def gravel_clast(tile=84, seed=3):                         # Gh (clast-supported)
+    """Clast-supported gravel, crudely bedded and *imbricated*: disc/blade
+    clasts consistently tilted (a-axis dipping up-current) - the classic
+    palaeocurrent fabric of bed-load gravel."""
     r = _rng(seed); els = []
+    imbric = 28                            # consistent up-current tilt (degrees)
     for row in range(6):
         y = 7 + row * 13 + (row % 2) * 2
         x = 4 + (row % 2) * 7
         while x < tile + 6:
-            s = 6 + next(r) * 4
-            els.append(_clast(x, y, "ell", s, (next(r) - .5) * 40))
-            x += s * 1.7
+            s = 5.5 + (next(r) ** 1.5) * 6     # varied sizes, a few large
+            els.append(_clast(x, y, "ell", s, imbric + (next(r) - .5) * 16))
+            x += s * 1.5
     return tile, wrap9("\n".join(els), tile)
 
 
 # --------------------------------------------------------------------- sand ---
-def sand_massive(tile=40, n=26, seed=4):                   # Sm
-    return tile, wrap9(_fines(tile, n, seed, 1.2), tile)
+def _stipple(tile, n, seed, rmin, rmax):
+    """Irregular stipple: random positions and varied grain sizes (not a grid)."""
+    r = _rng(seed)
+    return "\n".join(
+        f'<circle cx="{next(r)*tile:.1f}" cy="{next(r)*tile:.1f}" '
+        f'r="{rmin + (rmax-rmin)*next(r):.2f}" fill="#3a3a3a"/>' for _ in range(n))
 
 
-def sand_planar_xbed(tile=90, seth=30, dip=24, seed=1):    # SGp
+def sand_massive(tile=44, n=34, seed=4):                   # Sm
+    """Massive sand: irregular stipple of varied grain size."""
+    return tile, wrap9(_stipple(tile, n, seed, 0.7, 1.7), tile)
+
+
+def sand_planar_xbed(tile=96, seth=32, seed=1):            # SGp
+    """Planar cross-beds that show the process: foresets sweep down-current and
+    flatten *tangentially* into the lower bounding surface (grainflow down a
+    migrating dune's lee face). All foresets dip the same way -> palaeoflow."""
     els = []
+    run = seth * 1.7                       # down-current reach of the sweep
     for y0 in range(0, tile, seth):
-        els.append(f'<line x1="0" y1="{y0}" x2="{tile}" y2="{y0}" stroke="#222" stroke-width="1.4"/>')
-        run = seth / math.tan(math.radians(dip))
-        x = -tile
-        while x < tile * 2:
-            els.append(f'<line x1="{x:.1f}" y1="{y0+seth}" x2="{x+run:.1f}" y2="{y0}" '
-                       f'stroke="#6a6a6a" stroke-width="0.8"/>')
-            x += 11
+        yb = y0 + seth
+        els.append(f'<line x1="0" y1="{yb}" x2="{tile}" y2="{yb}" '
+                   f'stroke="#222" stroke-width="1.4"/>')
+        x = -run
+        while x < tile + run:
+            # steep at the top, asymptotic (tangential) to the bounding surface
+            els.append(f'<path d="M {x:.1f},{y0} C {x-0.18*run:.1f},{y0+0.45*seth:.1f} '
+                       f'{x-run+0.30*run:.1f},{yb:.1f} {x-run:.1f},{yb:.1f}" '
+                       f'fill="none" stroke="#6a6a6a" stroke-width="0.9"/>')
+            x += 8                         # divides tile -> seamless across sets
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
-def sand_trough_xbed(tile=96, seth=30, seed=2):            # SGt (festoon)
-    """Nested concave-up trough sets, stacked to fill each coset; set
-    boundaries truncate the festoons above."""
+def sand_trough_xbed(tile=96, seth=32, seed=2):            # SGt (festoon)
+    """Trough cross-beds: scoop-shaped erosional sets filled with nested,
+    asymmetric foresets that climb out down-current - the signature of 3-D
+    (sinuous-crested) dunes migrating and scouring."""
     els = []
-    span = tile // 2
+    span = tile // 2                       # trough width (divides tile)
     for si, y0 in enumerate(range(0, tile, seth)):
-        els.append(f'<line x1="0" y1="{y0}" x2="{tile}" y2="{y0}" stroke="#222" stroke-width="1.3"/>')
-        for ri, yb in enumerate(range(y0 + 8, y0 + seth + 8, 9)):
-            off = ((si + ri) % 2) * (span // 2)
-            for c in range(-1, 4):
-                cx = c * span + off
-                for k in range(1, 4):
-                    rx = k * (span / 6)
-                    els.append(f'<path d="M {cx-rx:.1f} {yb} Q {cx:.1f} {yb-2*k-3} '
-                               f'{cx+rx:.1f} {yb}" fill="none" stroke="#6a6a6a" stroke-width="0.8"/>')
+        off = (si % 2) * (span // 2)       # stagger troughs between cosets
+        yb = y0 + seth
+        # concave-up scour surface at the base of the coset
+        for c in range(-1, 4):
+            cx = c * span + off
+            els.append(f'<path d="M {cx-span/2:.1f},{y0} Q {cx:.1f},{yb+3:.1f} '
+                       f'{cx+span/2:.1f},{y0}" fill="none" stroke="#222" stroke-width="1.2"/>')
+            # nested foresets, asymmetric (steep down-current limb) = migration
+            for k in range(1, 6):
+                f = k / 6.0
+                rx = (span / 2) * (1 - 0.12 * k)
+                depth = (seth) * (1 - f) + 2
+                els.append(f'<path d="M {cx-rx:.1f},{y0+seth*0.12*k:.1f} '
+                           f'Q {cx+rx*0.35:.1f},{y0+depth:.1f} '
+                           f'{cx+rx:.1f},{y0+seth*0.05*k:.1f}" '
+                           f'fill="none" stroke="#6a6a6a" stroke-width="0.75"/>')
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
 def sand_ripple(tile=48, seed=6):                          # Sr (climbing ripples)
-    """Climbing-ripple trains: asymmetric crests with stoss-side foreset hatch,
-    each row offset up-current to suggest climb."""
+    """Climbing-ripple lamination: asymmetric ripples (gentle stoss, steep lee)
+    with foresets dipping down-current, each train stepping up-current as it
+    climbs - records simultaneous migration and rapid aggradation."""
     els = []
-    for row, y0 in enumerate(range(4, tile, 10)):
-        shift = (row % 2) * 8
-        for cx in range(-10 + shift, tile + 12, 15):
-            els.append(f'<path d="M {cx} {y0+7} Q {cx+5} {y0-1} {cx+11} {y0+7}" '
-                       f'fill="none" stroke="#444" stroke-width="1.0"/>')
-            for fx in range(cx + 2, cx + 10, 2):
-                els.append(f'<line x1="{fx}" y1="{y0+7}" x2="{fx+2.4}" y2="{y0+1}" '
-                           f'stroke="#888" stroke-width="0.6"/>')
+    wl = 16                                # ripple wavelength (divides tile)
+    for row, y0 in enumerate(range(4, tile, 9)):
+        climb = (row * 5) % wl             # up-current step per set = climbing
+        for cx in range(-wl + climb, tile + wl, wl):
+            # asymmetric crest: gentle stoss (left), steep lee (right)
+            els.append(f'<path d="M {cx},{y0+7} C {cx+wl*0.55:.1f},{y0+5:.1f} '
+                       f'{cx+wl*0.7:.1f},{y0-1:.1f} {cx+wl*0.82:.1f},{y0:.1f}" '
+                       f'fill="none" stroke="#3f3f3f" stroke-width="1.0"/>')
+            # lee-side foresets, dipping down-current (tangential at base)
+            for j in range(1, 4):
+                fx = cx + wl * (0.55 + 0.08 * j)
+                els.append(f'<path d="M {fx:.1f},{y0} Q {fx-2:.1f},{y0+5:.1f} '
+                           f'{fx-5:.1f},{y0+7:.1f}" fill="none" stroke="#8a8a8a" '
+                           f'stroke-width="0.55"/>')
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
 # --------------------------------------------------------- fines / rhythmite ---
-def rhythmite(tile=48, couplet=12, seed=0):                # Fl (varve)
+def rhythmite(tile=55, couplet=11, seed=0):                # Fl (varve)
+    """Rhythmites (varves): couplets of a dark winter clay and lighter summer
+    silt, drawn with gently wavy, uneven-thickness laminae - suspension
+    settling, not ruled lines. Fixed couplet pitch (divides tile) keeps the
+    repeat seamless while thickness and waviness vary couplet to couplet."""
     els = []
     for y in range(0, tile, couplet):
-        els.append(f'<rect x="0" y="{y}" width="{tile}" height="2.6" fill="#555"/>')
-        els.append(f'<line x1="0" y1="{y+5.5:.1f}" x2="{tile}" y2="{y+5.5:.1f}" stroke="#999" stroke-width="0.7"/>')
-        els.append(f'<line x1="0" y1="{y+8.5:.1f}" x2="{tile}" y2="{y+8.5:.1f}" stroke="#999" stroke-width="0.7"/>')
+        wig = _wiggle(seed + y, tile, 1.1)
+        th = 1.8 + (int(abs(y * 53.3)) % 100) / 100.0 * 1.8   # clay thickness
+        top = " ".join(f"{x},{y + wig(x):.1f}" for x in range(0, tile + 3, 3))
+        bot = " ".join(f"{x},{y + th + wig(x):.1f}" for x in range(tile, -3, -3))
+        els.append(f'<polygon points="{top} {bot}" fill="#555"/>')
+        els.append(_wavy_polyline(y + th + 3.0, tile, wig, "#9a9a9a", 0.6))
+        els.append(_wavy_polyline(y + th + 6.0, tile, wig, "#b4b4b4", 0.5))
     return tile, "\n".join(els)
 
 
 def mud_massive(tile=54, seed=8):                          # Fm (structureless mud)
-    return tile, wrap9(_fines(tile, 8, seed, 0.8), tile)
+    """Structureless silt & clay: near-blank with a few scattered silt flecks."""
+    return tile, wrap9(_stipple(tile, 9, seed, 0.6, 1.0), tile)
 
 
 # ------------------------------------------------------------------- eolian ---
-def loess(tile=30, seed=9):                                # Em
-    els = []
-    for i, j in itertools.product(range(6), range(6)):
-        jx = ((i * 7 + j * 13) % 5 - 2) * 0.4
-        jy = ((i * 11 + j * 5) % 5 - 2) * 0.4
-        els.append(f'<circle cx="{i*5+2+jx:.1f}" cy="{j*5+2+jy:.1f}" r="0.9" fill="#333"/>')
-    return tile, wrap9("\n".join(els), tile)
+def loess(tile=34, seed=9):                                # Em
+    """Loess: dense, fine, *irregular* eolian-silt stipple (no grid)."""
+    return tile, wrap9(_stipple(tile, 60, seed, 0.55, 1.0), tile)
 
 
 # ------------------------------------------------------------------ organic ---
 def peat(tile=48, seed=10):                                # P (organic / peat)
-    els = []
-    for row, y in enumerate(range(6, tile, 11)):
-        x = (row % 2) * 12
-        while x < tile + 12:
-            els.append(f'<rect x="{x}" y="{y}" width="16" height="3.2" rx="1.4" fill="#2b2b2b"/>')
-            x += 24
+    """Peat / organic mud: compressed fibrous lenses - irregular, discontinuous
+    horizontal dashes of varied length, denser than a ruled dash ornament."""
+    r = _rng(seed); els = []
+    for y in range(6, tile, 9):
+        x = -next(r) * 14
+        while x < tile + 6:
+            w = 8 + next(r) * 12
+            yy = y + (next(r) - 0.5) * 2.4
+            els.append(f'<rect x="{x:.1f}" y="{yy:.1f}" width="{w:.1f}" '
+                       f'height="2.6" rx="1.3" fill="#2b2b2b"/>')
+            x += w + 6 + next(r) * 10
     return tile, wrap9("\n".join(els), tile)
 
 
 # ------------------------------------------------------- more glaciofluvial ---
-def sand_laminated(tile=44, seed=15):                      # Sh (plane beds)
-    """Horizontally laminated sand: even, closely spaced plane-bed laminae."""
-    els = [f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#666" '
-           f'stroke-width="0.8"/>' for y in range(4, tile, 6)]
+def sand_laminated(tile=48, seed=15):                      # Sh (plane beds)
+    """Horizontally laminated sand (upper-stage plane beds): near-parallel
+    laminae with slight, hand-drawn waviness and uneven thickness."""
+    els = [_wavy_polyline(y, tile, _wiggle(seed + y, tile, 0.5), "#666", 0.8)
+           for y in range(4, tile, 6)]
     return tile, "\n".join(els)
 
 
-def gravel_matrix(tile=84, density=11, seed=17):           # Gms (debris flow)
-    """Matrix-supported gravel: floating clasts in a stippled sandy matrix."""
-    inner = (_fines(tile, 40, seed + 5, 0.9)
-             + _scatter(tile, density, 6, 10, seed, kinds=("ell", "ang", "ell")))
+def gravel_matrix(tile=88, density=13, seed=17):           # Gms (debris flow)
+    """Matrix-supported gravel: varied clasts floating (not touching) in a
+    stippled sandy matrix - en-masse debris-flow emplacement, no sorting."""
+    inner = (_stipple(tile, 46, seed + 5, 0.6, 1.1)
+             + _scatter(tile, density, 4, 11, seed, kinds=("ell", "ang", "ell"), skew=2.0))
     return tile, wrap9(inner, tile)
 
 
