@@ -160,23 +160,35 @@ FLOW = 1
 
 
 def sand_ripple(tile=54, seed=6):                          # Sr (ripple x-lam)
-    """Ripple cross-lamination: climbing trains of asymmetric current ripples -
-    gentle stoss, steep lee with foreset hachures on the down-current side (the
-    field-log 'climbing / current ripples' ornament). Assumes flow FLOW>0."""
+    """Ripple cross-lamination: climbing trains of asymmetric current ripples.
+
+    Convention (why the direction matters): the steep **lee face points
+    down-current** and the **foreset laminae dip down-current** - to the right
+    for FLOW=+1 (left-to-right). The gentle stoss faces up-current. Both the
+    crest asymmetry and the foreset dip are keyed to FLOW via ``X(f)``, so the
+    ornament flips consistently if the flow convention is reversed.
+    """
+    d = FLOW                               # +1 => down-current is +x (rightward)
     els = [_sand_ground(tile, seed)]       # sand lithology reads through
     wl = 18                                # ripple wavelength (divides tile)
+
+    def X(cx, f):                          # fraction f in [0,1], mirrored for d<0
+        return cx + wl * (0.5 + (f - 0.5) * d)
+
     for row, y0 in enumerate(range(6, tile + 6, 9)):
-        climb = (row * 6) % wl             # up-current step per set = climbing
+        climb = (row * 6) % wl             # phase step per row = climbing
         for cx in range(-wl + climb, tile + wl, wl):
-            els.append(f'<path d="M {cx},{y0+4} C {cx+wl*0.5:.1f},{y0+3:.1f} '
-                       f'{cx+wl*0.75:.1f},{y0-3:.1f} {cx+wl*0.85:.1f},{y0-3:.1f} '
-                       f'C {cx+wl*0.9:.1f},{y0-3:.1f} {cx+wl*0.95:.1f},{y0+1:.1f} '
-                       f'{cx+wl:.1f},{y0+4:.1f}" fill="none" stroke="#3f3f3f" '
-                       f'stroke-width="1.0"/>')
-            for j in range(3):             # lee-side foreset hachures
-                hx = cx + wl * (0.72 + 0.06 * j)
-                els.append(f'<line x1="{hx:.1f}" y1="{y0-2:.1f}" x2="{hx-3:.1f}" '
-                           f'y2="{y0+3:.1f}" stroke="#8a8a8a" stroke-width="0.55"/>')
+            # crest: gentle stoss (up-current) -> peak -> steep lee (down-current)
+            els.append(f'<path d="M {X(cx,0):.1f},{y0+4} '
+                       f'C {X(cx,0.5):.1f},{y0+3} {X(cx,0.75):.1f},{y0-3} '
+                       f'{X(cx,0.85):.1f},{y0-3} C {X(cx,0.9):.1f},{y0-3} '
+                       f'{X(cx,0.95):.1f},{y0+1} {X(cx,1):.1f},{y0+4}" '
+                       f'fill="none" stroke="#3f3f3f" stroke-width="1.0"/>')
+            for f in (0.80, 0.87, 0.94):   # foresets on the lee, dipping down-current
+                fx = X(cx, f)
+                els.append(f'<line x1="{fx:.1f}" y1="{y0-2:.1f}" '
+                           f'x2="{fx + d*2.6:.1f}" y2="{y0+3:.1f}" '
+                           f'stroke="#8a8a8a" stroke-width="0.55"/>')
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
