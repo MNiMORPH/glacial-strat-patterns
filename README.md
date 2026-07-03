@@ -6,9 +6,17 @@ glacial vocabulary that the USGS/FGDC lithologic set lacks: diamicton/till
 families, rhythmites, **dropstones that deflect the laminae**, cross-bedded
 outwash, loess, peat.
 
+The ornaments are drawn the way a geologist draws them by hand — to **show
+process and form**, not just texture. Cross-bed foresets sweep down-current and
+flatten tangentially into the bounding surface (grainflow down a migrating
+dune); gravel is imbricated; ripples climb; diamict is poorly sorted with no
+fabric; varves are wavy and uneven. Consistent dips and tilts read as
+palaeoflow.
+
 SVG is the source of truth; the patterns are generated parametrically, tile
-seamlessly, and come with a one-call **matplotlib** helper for drawing columns
-in Python.
+seamlessly, and ship three ways to use them: a **matplotlib** column helper
+(raster tiles *or* vector hatches), standalone **SVG/PNG** tiles, and an
+importable **Inkscape** pattern palette.
 
 ![contact sheet](contact_sheet.png)
 
@@ -76,13 +84,36 @@ A full worked section is in [`examples/example_column.py`](examples/example_colu
 
 ![example column](examples/example_column.png)
 
-Not using Python? The `svg/<code>.svg` tiles drop straight into Inkscape /
-Illustrator / QGIS as pattern fills; `metadata/facies.csv` is the index.
+### Raster tiles vs. vector hatches
+
+Two fill routes, same facies keys:
+
+- `mpl.column_fill(...)` tiles the **raster** PNG — the *faithful* ornament.
+- `hatch.column_fill_hatch(...)` uses a matplotlib **hatch** — *vector*,
+  resolution-independent, and tiny in PDF/SVG output, at the cost of fidelity
+  (built-in hatches only approximate the tiles). Use it for publication figures
+  you'll zoom or edit downstream:
+
+```python
+from glacial_patterns.hatch import column_fill_hatch
+column_fill_hatch(ax, "SGp", 0, 1, 4, 3)   # vector cross-beds
+```
+
+See [`examples/example_hatch.py`](examples/example_hatch.py) (writes a
+true-vector PDF). Each facies' hatch string is also in `metadata/facies.csv`.
+
+### Inkscape / Illustrator / QGIS
+
+Not using Python? The `svg/<code>.svg` tiles drop straight in as pattern fills,
+and `metadata/facies.csv` is the index. For Inkscape there's a ready-made
+palette, [`inkscape/glacial-patterns.svg`](inkscape/glacial-patterns.svg):
+open it and copy a swatch, or drop it into your Inkscape user *patterns* folder
+to get all 18 as stock patterns in **Object → Fill and Stroke → Pattern**.
 
 ## Regenerating the assets
 
 ```bash
-python -m glacial_patterns.build      # writes svg/, png/, metadata/, contact_sheet
+python -m glacial_patterns.build   # writes svg/, png/, metadata/, contact_sheet, inkscape/
 ```
 
 Regeneration needs the `inkscape` CLI (used to rasterise SVG → PNG). Editing a
@@ -90,18 +121,23 @@ generator in `glacial_patterns/patterns.py` and rebuilding updates every asset.
 
 ## Design notes
 
+- **Ornament shows process.** Foresets are tangential, gravel imbricated,
+  ripples asymmetric and climbing — directional strokes encode flow and form,
+  the way field-manual lithology ornaments do.
+- **Organic, not CAD-regular.** Irregularity is a *deterministic function of
+  position*, so clast size, lamina thickness, and waviness vary hand-drawn-style
+  while the repeating tile stays seamless.
 - **SVG-native tiling.** Each pattern is an SVG `<pattern>`; discrete ornaments
   are wrapped across tile edges (`wrap9`) so repeats are seamless.
-- **Deterministic.** Scatter uses a seeded PRNG, so tiles are reproducible.
+- **Deterministic.** A seeded PRNG makes tiles reproducible.
 - **Codes + aliases.** Lithofacies code is the primary key; a friendly alias
   resolves to the same facies.
 
 ## Roadmap
 
-Optional colour variants per facies, a matplotlib hatch export, per-facies
-parameter presets, and further ornaments (striated/faceted-clast markers,
-till fabric arrows, iceberg-turbate). Contributions of regional facies schemes
-welcome.
+Optional colour variants per facies, per-facies parameter presets, and further
+ornaments (striated/faceted-clast markers, till-fabric arrows, iceberg-turbate).
+Contributions of regional facies schemes welcome.
 
 ## Licence
 
