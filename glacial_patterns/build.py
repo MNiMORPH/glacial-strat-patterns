@@ -10,11 +10,13 @@ import os
 import subprocess
 
 from .catalog import FACIES
+from .hatch import HATCH
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SVG_DIR = os.path.join(ROOT, "svg")
 PNG_DIR = os.path.join(ROOT, "png")
 META_DIR = os.path.join(ROOT, "metadata")
+INK = "http://www.inkscape.org/namespaces/inkscape"
 
 
 def pattern_defs(code, fn):
@@ -53,15 +55,17 @@ def build(px=120, raster_w=240):
         open(sp, "w").write(svg)
         rasterize(sp, pp, raster_w)
         rows.append(dict(code=code, alias=alias, group=group, description=desc,
+                         hatch=HATCH.get(code, ""),
                          svg=f"svg/{code}.svg", png=f"png/{code}.png"))
     json.dump(rows, open(os.path.join(META_DIR, "facies.json"), "w"), indent=1)
     with open(os.path.join(META_DIR, "facies.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["code", "alias", "group", "description",
-                                          "svg", "png"])
+                                          "hatch", "svg", "png"])
         w.writeheader()
         w.writerows(rows)
     contact_sheet(rows)
-    print(f"built {len(rows)} facies -> svg/, png/, metadata/")
+    inkscape_palette(rows)
+    print(f"built {len(rows)} facies -> svg/, png/, metadata/, inkscape/")
 
 
 def contact_sheet(rows, path=None, ncols=6):
@@ -91,6 +95,56 @@ def contact_sheet(rows, path=None, ncols=6):
            f'viewBox="0 0 {tw} {th}">\n<defs>{"".join(defs)}</defs>\n'
            f'<rect width="100%" height="100%" fill="white"/>\n' + "\n".join(body) +
            "\n</svg>\n")
+    open(path, "w").write(svg)
+    rasterize(path, path.replace(".svg", ".png"), min(1800, tw * 2))
+
+
+def inkscape_palette(rows, path=None, ncols=6):
+    """A single SVG of all facies as Inkscape stock <pattern>s plus a visible
+    labelled palette. Open it in Inkscape and copy patterns, or drop it in your
+    user patterns folder (see the header comment) to get them in Fill & Stroke.
+    """
+    path = path or os.path.join(ROOT, "inkscape", "glacial-patterns.svg")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tiles, defs, body = set(), [], []
+    W, H, gx, gy, top, labh = 96, 118, 20, 30, 54, 34
+    cellh = H + labh
+    for i, r in enumerate(rows):
+        code = r["code"]
+        fn = next(f for c, f, *_ in FACIES if c == code)
+        tile, inner = fn()
+        tiles.add(tile)
+        label = f"Glacial: {code} - {r['alias']}"
+        defs.append(f'<pattern id="gsp_{code}" inkscape:stockid="{label}" '
+                    f'inkscape:isstock="true" inkscape:label="{label}" '
+                    f'patternUnits="userSpaceOnUse" width="{tile}" height="{tile}">'
+                    f'<rect width="{tile}" height="{tile}" fill="white"/>{inner}</pattern>')
+        col, row = i % ncols, i // ncols
+        x, y = gx + col * (W + gx), top + row * (cellh + gy)
+        body.append(f'<rect x="{x}" y="{y}" width="{W}" height="{H}" '
+                    f'fill="url(#gsp_{code})" stroke="black" stroke-width="1.2"/>')
+        body.append(f'<text x="{x+W/2}" y="{y+H+17}" text-anchor="middle" '
+                    f'font-family="sans-serif" font-size="14" font-weight="bold">{code}</text>')
+        body.append(f'<text x="{x+W/2}" y="{y+H+31}" text-anchor="middle" '
+                    f'font-family="sans-serif" font-size="10" fill="#444">{r["alias"]}</text>')
+    clips = "".join(f'<clipPath id="clip{t}"><rect width="{t}" height="{t}"/></clipPath>'
+                    for t in sorted(tiles))
+    nrows = (len(rows) + ncols - 1) // ncols
+    tw = gx + ncols * (W + gx)
+    th = top + nrows * (cellh + gy)
+    header = ("<!-- glacial-strat-patterns Inkscape pattern palette.\n"
+              "     Use: open in Inkscape and copy a swatch, OR copy this file into\n"
+              "     your Inkscape user patterns folder (Edit > Preferences > System >\n"
+              "     'User config' -> ../patterns/) so the fills appear as stock\n"
+              "     patterns in Object > Fill and Stroke > Pattern. CC-BY-4.0. -->\n")
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" '
+           f'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="{INK}" '
+           f'width="{tw}" height="{th}" viewBox="0 0 {tw} {th}">\n{header}'
+           f'<defs>{clips}{"".join(defs)}</defs>\n'
+           f'<rect width="100%" height="100%" fill="white"/>\n'
+           f'<text x="{gx}" y="30" font-family="sans-serif" font-size="20" '
+           f'font-weight="bold">Glacial / Quaternary strat-column patterns</text>\n'
+           + "\n".join(body) + "\n</svg>\n")
     open(path, "w").write(svg)
     rasterize(path, path.replace(".svg", ".png"), min(1800, tw * 2))
 
