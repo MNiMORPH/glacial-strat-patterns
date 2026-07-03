@@ -65,8 +65,15 @@ they're drawn as placed features over a fill:
 
 - `mpl.dropstone(ax, x, y, r)` — ice-rafted clast deflecting the laminae (use over `Fl`/`Fm`)
 - `mpl.boulder_pavement(ax, y, x0, x1)` — a clast line marking a subglacial pavement / lag
-- `mpl.erosion_contact(ax, y, x0, x1)` — a scalloped erosional surface
+- `mpl.pebble_lag(ax, y, x0, x1, imbricate=…)` — a pebble stringer, optionally imbricated
+- `mpl.erosion_contact(ax, y, x0, x1)` — a scalloped erosional / scour surface
 - `mpl.deformation(ax, x0, x1, y0, y1)` — convolute / recumbent folds drawn *over* any fill (a deformed zone; the `Fd` tile is the stand-alone version)
+- `mpl.flame(ax, x, y)` — flame / water-escape (dewatering) structure
+- `mpl.mud_rip_up(ax, x, y)` — a mud rip-up clast
+
+Ornament forms are calibrated to published measured-section keys and the USGS
+FGDC lithologic-pattern standard (mud dashes, sand stipple, tangential
+cross-bed foresets, festoon troughs, asymmetric climbing ripples).
 
 ## Quickstart
 
