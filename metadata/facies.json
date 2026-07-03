@@ -4,6 +4,7 @@
   "alias": "till (massive)",
   "group": "diamicton",
   "description": "Diamicton, matrix-supported, massive - subglacial/lodgement till",
+  "hatch": "o",
   "svg": "svg/Dmm.svg",
   "png": "png/Dmm.png"
  },
@@ -12,6 +13,7 @@
   "alias": "stratified diamicton",
   "group": "diamicton",
   "description": "Diamicton, matrix-supported, stratified - melt-out / waterlain till",
+  "hatch": "o-",
   "svg": "svg/Dms.svg",
   "png": "png/Dms.png"
  },
@@ -20,6 +22,7 @@
   "alias": "clast-rich diamicton",
   "group": "diamicton",
   "description": "Diamicton, clast-supported, massive - winnowed / coarse till",
+  "hatch": "OO",
   "svg": "svg/Dcm.svg",
   "png": "png/Dcm.png"
  },
@@ -28,6 +31,7 @@
   "alias": "gravel",
   "group": "glaciofluvial",
   "description": "Gravel, clast-supported, horizontally bedded - outwash / channel lag",
+  "hatch": "oo",
   "svg": "svg/Gh.svg",
   "png": "png/Gh.png"
  },
@@ -36,6 +40,7 @@
   "alias": "planar cross-beds",
   "group": "glaciofluvial",
   "description": "Sand & gravel, planar cross-bedded - outwash bar foresets",
+  "hatch": "//",
   "svg": "svg/SGp.svg",
   "png": "png/SGp.png"
  },
@@ -44,6 +49,7 @@
   "alias": "trough cross-beds",
   "group": "glaciofluvial",
   "description": "Sand & gravel, trough cross-bedded - dune migration in outwash channels",
+  "hatch": "//\\\\",
   "svg": "svg/SGt.svg",
   "png": "png/SGt.png"
  },
@@ -52,6 +58,7 @@
   "alias": "ripple lamination",
   "group": "glaciofluvial",
   "description": "Sand, ripple / climbing-ripple cross-lamination - waning flow",
+  "hatch": "//",
   "svg": "svg/Sr.svg",
   "png": "png/Sr.png"
  },
@@ -60,6 +67,7 @@
   "alias": "laminated sand",
   "group": "glaciofluvial",
   "description": "Sand, horizontally laminated - upper-stage plane beds",
+  "hatch": "--",
   "svg": "svg/Sh.svg",
   "png": "png/Sh.png"
  },
@@ -68,6 +76,7 @@
   "alias": "massive sand",
   "group": "glaciofluvial",
   "description": "Sand, massive or faintly graded",
+  "hatch": "..",
   "svg": "svg/Sm.svg",
   "png": "png/Sm.png"
  },
@@ -76,6 +85,7 @@
   "alias": "matrix-supported gravel",
   "group": "glaciofluvial",
   "description": "Gravel, matrix-supported - debris-flow / ice-marginal diamict",
+  "hatch": "o.",
   "svg": "svg/Gms.svg",
   "png": "png/Gms.png"
  },
@@ -84,6 +94,7 @@
   "alias": "colluvium (soliflucted)",
   "group": "colluvial",
   "description": "Soliflucted colluvial diamict - clasts aligned down-slope",
+  "hatch": "o/",
   "svg": "svg/Cdm.svg",
   "png": "png/Cdm.png"
  },
@@ -92,6 +103,7 @@
   "alias": "deformed / folded",
   "group": "deformation",
   "description": "Folded or contorted laminae - glaciotectonite / soft-sediment deformation",
+  "hatch": "xx",
   "svg": "svg/Fd.svg",
   "png": "png/Fd.png"
  },
@@ -100,6 +112,7 @@
   "alias": "ice-contact (collapsed)",
   "group": "deformation",
   "description": "Bedded sand faulted into grabens - ice-contact collapse structures",
+  "hatch": "|-",
   "svg": "svg/SGc.svg",
   "png": "png/SGc.png"
  },
@@ -108,6 +121,7 @@
   "alias": "rhythmite / varve",
   "group": "glaciolacustrine",
   "description": "Laminated silt & clay rhythmites (varves) - distal glaciolacustrine",
+  "hatch": "-",
   "svg": "svg/Fl.svg",
   "png": "png/Fl.png"
  },
@@ -116,6 +130,7 @@
   "alias": "massive mud",
   "group": "glaciolacustrine",
   "description": "Massive silt & clay - suspension settling; hosts dropstones",
+  "hatch": ".",
   "svg": "svg/Fm.svg",
   "png": "png/Fm.png"
  },
@@ -124,6 +139,7 @@
   "alias": "loess",
   "group": "eolian",
   "description": "Massive eolian silt (loess)",
+  "hatch": "...",
   "svg": "svg/Em.svg",
   "png": "png/Em.png"
  },
@@ -132,6 +148,7 @@
   "alias": "peat / organic",
   "group": "organic",
   "description": "Peat and organic-rich mud - bog / fen",
+  "hatch": "---",
   "svg": "svg/P.svg",
   "png": "png/P.png"
  },
@@ -140,6 +157,7 @@
   "alias": "bedrock",
   "group": "bedrock",
   "description": "Undifferentiated bedrock / substrate",
+  "hatch": "++",
   "svg": "svg/R.svg",
   "png": "png/R.png"
  }
