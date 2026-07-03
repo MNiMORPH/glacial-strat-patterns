@@ -153,66 +153,10 @@ def sand_massive(tile=44, n=34, seed=4):                   # Sm
     return tile, wrap9(_stipple(tile, n, seed, 0.7, 1.7), tile)
 
 
-def sand_planar_xbed(tile=96, seth=32, seed=1):            # SGp
-    """Planar cross-beds that show the process: foresets sweep down-current
-    (FLOW direction) and flatten *tangentially* into the lower bounding surface
-    (grainflow down a migrating dune's lee face). Uniform dip -> palaeoflow."""
-    els = [_sand_ground(tile, seed)]       # sand lithology reads through
-    run = seth * 1.7 * FLOW                # signed down-current reach
-    for y0 in range(0, tile, seth):
-        yb = y0 + seth
-        els.append(f'<line x1="0" y1="{yb}" x2="{tile}" y2="{yb}" '
-                   f'stroke="#222" stroke-width="1.4"/>')
-        x = -abs(run)
-        while x < tile + abs(run):
-            # steep at the top, asymptotic (tangential) to the bounding surface
-            els.append(f'<path d="M {x:.1f},{y0} C {x+0.18*run:.1f},{y0+0.45*seth:.1f} '
-                       f'{x+0.70*run:.1f},{yb:.1f} {x+run:.1f},{yb:.1f}" '
-                       f'fill="none" stroke="#6a6a6a" stroke-width="0.9"/>')
-            x += 8                         # divides tile -> seamless across sets
-    return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
-
-
-def sand_trough_xbed(tile=96, seth=32, seed=2):            # SGt (festoon)
-    """Trough cross-beds: scoop-shaped erosional sets filled with nested,
-    asymmetric foresets that climb out down-current - the signature of 3-D
-    (sinuous-crested) dunes migrating and scouring."""
-    els = [_sand_ground(tile, seed)]       # sand lithology reads through
-    span = tile // 2                       # trough width (divides tile)
-    for si, y0 in enumerate(range(0, tile, seth)):
-        off = (si % 2) * (span // 2)       # stagger troughs between cosets
-        for c in range(-1, 4):
-            cx = c * span + off
-            # concave-up scour scoop
-            els.append(f'<path d="M {cx-span/2:.1f},{y0} Q {cx:.1f},{y0+seth+3:.1f} '
-                       f'{cx+span/2:.1f},{y0}" fill="none" stroke="#222" stroke-width="1.1"/>')
-            # fanning internal foresets, tangential, verging down-current
-            for k in range(1, 5):
-                fr = k / 5.0
-                els.append(f'<path d="M {cx-span/2*(1-0.15*k):.1f},{y0+2:.1f} '
-                           f'Q {cx+FLOW*span*0.28:.1f},{y0+seth*(1-fr)+3:.1f} '
-                           f'{cx+span/2*(1-0.05*k):.1f},{y0+2:.1f}" '
-                           f'fill="none" stroke="#6a6a6a" stroke-width="0.7"/>')
-    return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
-
-
 # Flow convention: FLOW = +1 draws transport left-to-right (down-current = +x),
 # the standard convention (USGS / general practice). Foreset & ripple marks and
 # clast imbrication all derive their direction from it.
 FLOW = 1
-
-
-def _xbed_mark(x, y, s, flow=FLOW):
-    """A small cross-bed set: a tangential master foreset with a few foreset
-    ticks, dipping down-current. The recognisable 'cross-bedding present' mark."""
-    x2 = x + flow * s
-    m = (f'<path d="M {x:.1f},{y:.1f} Q {x+flow*s*0.35:.1f},{y-s*0.8:.1f} '
-         f'{x2:.1f},{y-s*0.15:.1f}" fill="none" stroke="#3f3f3f" stroke-width="1.0"/>')
-    ticks = "".join(
-        f'<path d="M {x+flow*s*0.18*j:.1f},{y:.1f} Q {x+flow*s*(0.18*j+0.2):.1f},'
-        f'{y-s*0.4:.1f} {x+flow*s*(0.18*j+0.42):.1f},{y-s*0.5:.1f}" fill="none" '
-        f'stroke="#8a8a8a" stroke-width="0.6"/>' for j in range(1, 4))
-    return m + ticks
 
 
 def sand_ripple(tile=54, seed=6):                          # Sr (ripple x-lam)
@@ -233,19 +177,6 @@ def sand_ripple(tile=54, seed=6):                          # Sr (ripple x-lam)
                 hx = cx + wl * (0.72 + 0.06 * j)
                 els.append(f'<line x1="{hx:.1f}" y1="{y0-2:.1f}" x2="{hx-3:.1f}" '
                            f'y2="{y0+3:.1f}" stroke="#8a8a8a" stroke-width="0.55"/>')
-    return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
-
-
-def sand_xlam(tile=64, seed=15):                           # Sx (x-bedded sand)
-    """Laminated sand carrying sparse cross-bed marks - 'sand, cross-bedding
-    present', the common shorthand where full foresets aren't drawn."""
-    els = [_sand_ground(tile, seed)]       # sand lithology reads through
-    els += [f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#777" '
-            f'stroke-width="0.7"/>' for y in range(6, tile, 7)]
-    r = _rng(seed)
-    for _ in range(6):
-        cx, cy = 8 + next(r) * (tile - 18), 9 + next(r) * (tile - 16)
-        els.append(_xbed_mark(cx, cy, 9))
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
@@ -304,12 +235,6 @@ def peat(tile=48, seed=10):                                # P (organic / peat)
 
 
 # ------------------------------------------------------- more glaciofluvial ---
-def sand_laminated(tile=48, seed=15):                      # Sh (plane beds)
-    """Horizontally laminated sand: straight, evenly spaced parallel laminae -
-    upper-stage plane beds (field-log 'planar bedding / planar laminations')."""
-    return tile, "\n".join(
-        f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#666" stroke-width="0.8"/>'
-        for y in range(5, tile, 6))
 
 
 def gravel_matrix(tile=88, density=13, seed=17):           # Gms (debris flow)
@@ -335,58 +260,6 @@ def colluvium(tile=80, density=10, seed=13):               # Cdm (soliflucted)
         cx, cy = next(r) * tile, next(r) * tile
         cl.append(_clast(cx, cy, "ell", 6 + next(r) * 3, 28 + (next(r) - .5) * 16))
     return tile, "".join(waves) + wrap9("".join(cl), tile)
-
-
-def _fold_lamina(tile, ybase, amp, verge, n=3):
-    """One folded lamina: n asymmetric anticlines overturned (recumbent) toward
-    the down-current (-x) side."""
-    step = tile / (n * 4)
-    d = f"M 0,{ybase:.1f}"
-    x = 0.0
-    for i in range(n * 4):
-        x2 = x + step
-        up = i % 4 in (0, 1)
-        cy = ybase - amp if up else ybase + amp * 0.7
-        cx = x + step * (0.5 - verge * (1 if up else -1))
-        d += f" Q {cx:.1f},{cy:.1f} {x2:.1f},{ybase:.1f}"
-        x = x2
-    return d
-
-
-def deformed_fines(tile=72, seed=14):                      # Fd (glaciotectonite)
-    """Convolute / recumbent folds - laminae folded into overturned hooks
-    (soft-sediment loading, slumping, or glaciotectonic deformation). Distinct
-    from the regular waves of current bedforms; tight, contorted, verging."""
-    els = []
-    for k, y0 in enumerate(range(4, tile + 4, 6)):
-        a = 9 * (0.8 + 0.25 * math.sin(k * 1.3))
-        els.append(f'<path d="{_fold_lamina(tile, y0, a, 0.42)}" fill="none" '
-                   f'stroke="#555" stroke-width="0.85"/>')
-    for hx, hy, s in ((tile * 0.16, tile * 0.5, 7), (tile * 0.5, tile * 0.34, 8),
-                      (tile * 0.83, tile * 0.62, 7)):      # recumbent hook closures
-        els.append(f'<path d="M {hx-s:.0f},{hy:.0f} C {hx-s:.0f},{hy-s*1.4:.0f} '
-                   f'{hx+s*0.9:.0f},{hy-s*1.4:.0f} {hx+s*0.8:.0f},{hy-s*0.3:.0f} '
-                   f'C {hx+s*0.7:.0f},{hy+s*0.6:.0f} {hx-s*0.4:.0f},{hy+s*0.5:.0f} '
-                   f'{hx-s*0.3:.0f},{hy-s*0.3:.0f}" fill="none" stroke="#333" '
-                   f'stroke-width="1.0"/>')
-    return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
-
-
-def collapsed_beds(tile=90, seed=16):                      # SGc (ice-contact)
-    """Ice-contact / collapse structures: bedded sand cut by small normal
-    faults that offset the laminae into grabens."""
-    def off(x):
-        return 4 if tile * 0.32 < x < tile * 0.68 else 0   # central graben
-    els = []
-    for y0 in range(6, tile, 8):
-        els.append(f'<path d="M 0 {y0} L {tile*0.32:.0f} {y0} '
-                   f'L {tile*0.32:.0f} {y0+4} L {tile*0.68:.0f} {y0+4} '
-                   f'L {tile*0.68:.0f} {y0} L {tile} {y0}" fill="none" '
-                   f'stroke="#666" stroke-width="0.8"/>')
-    for fx in (tile * 0.32, tile * 0.68):                  # fault planes
-        els.append(f'<line x1="{fx:.0f}" y1="0" x2="{fx:.0f}" y2="{tile}" '
-                   f'stroke="#222" stroke-width="1.1"/>')
-    return tile, "\n".join(els)
 
 
 # ------------------------------------------------------------------ bedrock ---

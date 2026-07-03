@@ -18,13 +18,12 @@ from .catalog import resolve, BY_CODE
 # code -> best-effort built-in matplotlib hatch (approximate; see module docs)
 HATCH = {
     "Dmm": "o",     "Dms": "o-",   "Dcm": "OO",   "Gh": "oo",   "Gms": "o.",
-    "SGp": "//",    "SGt": "//\\\\", "Sr": "//",   "Sx": "-/",   "Sh": "--",   "Sm": "..",
-    "Fl": "-",      "Fm": ".",     "Cdm": "o/",   "Fd": "xx",   "SGc": "|-",
+    "Sr": "//",     "Sm": "..",    "Fl": "-",     "Fm": ".",    "Cdm": "o/",
     "Em": "...",    "P": "---",    "R": "++",
 }
 
 # facies whose ornament the built-in hatches cannot render faithfully
-APPROXIMATE = {"Dmm", "Dms", "Dcm", "Gms", "SGt", "Sr", "Cdm", "Fd", "SGc"}
+APPROXIMATE = {"Dmm", "Dms", "Dcm", "Gms", "Sr", "Cdm"}
 
 
 def hatch_for(key):
