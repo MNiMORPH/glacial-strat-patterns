@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2578" height="324" viewBox="0 0 2578 324">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="696" viewBox="0 0 860 696">
 <defs><clipPath id="clip84"><rect width="84" height="84"/></clipPath><pattern id="pat_Dmm" patternUnits="userSpaceOnUse" width="84" height="84"><rect width="84" height="84" fill="white"/><g transform="translate(-84 -84)"><polygon points="24.8,22.4 21.5,27.7 15.3,29.2 14.6,22.6 19.2,18.5" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
 <polygon points="25.6,83.2 20.1,84.4 15.2,81.2 19.2,76.6 24.7,77.2" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
 <ellipse cx="6.7" cy="40.0" rx="7.2" ry="4.5" transform="rotate(-28 6.7 40.0)" fill="#d2d2d2" stroke="#222" stroke-width="1.1"/>
@@ -2641,58 +2641,58 @@
 <line x1="40.3" y1="-2.0" x2="34.6" y2="6.2" stroke="#333" stroke-width="1.1"/>
 <line x1="35.4" y1="0.7" x2="39.5" y2="3.6" stroke="#333" stroke-width="1.1"/></g></pattern></defs>
 <rect width="100%" height="100%" fill="white"/>
-<rect x="22" y="16" width="120" height="260" fill="url(#pat_Dmm)" stroke="black" stroke-width="1.5"/>
-<text x="82.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Dmm</text>
-<text x="82.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">till (massive)</text>
-<rect x="164" y="16" width="120" height="260" fill="url(#pat_Dms)" stroke="black" stroke-width="1.5"/>
-<text x="224.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Dms</text>
-<text x="224.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">stratified diamicton</text>
-<rect x="306" y="16" width="120" height="260" fill="url(#pat_Dcm)" stroke="black" stroke-width="1.5"/>
-<text x="366.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Dcm</text>
-<text x="366.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">clast-rich diamicton</text>
-<rect x="448" y="16" width="120" height="260" fill="url(#pat_Gh)" stroke="black" stroke-width="1.5"/>
-<text x="508.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Gh</text>
-<text x="508.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">gravel</text>
-<rect x="590" y="16" width="120" height="260" fill="url(#pat_SGp)" stroke="black" stroke-width="1.5"/>
-<text x="650.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">SGp</text>
-<text x="650.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">planar cross-beds</text>
-<rect x="732" y="16" width="120" height="260" fill="url(#pat_SGt)" stroke="black" stroke-width="1.5"/>
-<text x="792.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">SGt</text>
-<text x="792.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">trough cross-beds</text>
-<rect x="874" y="16" width="120" height="260" fill="url(#pat_Sr)" stroke="black" stroke-width="1.5"/>
-<text x="934.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Sr</text>
-<text x="934.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">ripple lamination</text>
-<rect x="1016" y="16" width="120" height="260" fill="url(#pat_Sh)" stroke="black" stroke-width="1.5"/>
-<text x="1076.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Sh</text>
-<text x="1076.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">laminated sand</text>
-<rect x="1158" y="16" width="120" height="260" fill="url(#pat_Sm)" stroke="black" stroke-width="1.5"/>
-<text x="1218.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Sm</text>
-<text x="1218.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">massive sand</text>
-<rect x="1300" y="16" width="120" height="260" fill="url(#pat_Gms)" stroke="black" stroke-width="1.5"/>
-<text x="1360.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Gms</text>
-<text x="1360.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">matrix-supported gravel</text>
-<rect x="1442" y="16" width="120" height="260" fill="url(#pat_Cdm)" stroke="black" stroke-width="1.5"/>
-<text x="1502.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Cdm</text>
-<text x="1502.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">colluvium (soliflucted)</text>
-<rect x="1584" y="16" width="120" height="260" fill="url(#pat_Fd)" stroke="black" stroke-width="1.5"/>
-<text x="1644.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Fd</text>
-<text x="1644.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">deformed / folded</text>
-<rect x="1726" y="16" width="120" height="260" fill="url(#pat_SGc)" stroke="black" stroke-width="1.5"/>
-<text x="1786.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">SGc</text>
-<text x="1786.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">ice-contact (collapsed)</text>
-<rect x="1868" y="16" width="120" height="260" fill="url(#pat_Fl)" stroke="black" stroke-width="1.5"/>
-<text x="1928.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Fl</text>
-<text x="1928.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">rhythmite / varve</text>
-<rect x="2010" y="16" width="120" height="260" fill="url(#pat_Fm)" stroke="black" stroke-width="1.5"/>
-<text x="2070.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Fm</text>
-<text x="2070.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">massive mud</text>
-<rect x="2152" y="16" width="120" height="260" fill="url(#pat_Em)" stroke="black" stroke-width="1.5"/>
-<text x="2212.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">Em</text>
-<text x="2212.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">loess</text>
-<rect x="2294" y="16" width="120" height="260" fill="url(#pat_P)" stroke="black" stroke-width="1.5"/>
-<text x="2354.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">P</text>
-<text x="2354.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">peat / organic</text>
-<rect x="2436" y="16" width="120" height="260" fill="url(#pat_R)" stroke="black" stroke-width="1.5"/>
-<text x="2496.0" y="298" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold">R</text>
-<text x="2496.0" y="316" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">bedrock</text>
+<rect x="20" y="12" width="120" height="170" fill="url(#pat_Dmm)" stroke="black" stroke-width="1.5"/>
+<text x="80.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Dmm</text>
+<text x="80.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">till (massive)</text>
+<rect x="160" y="12" width="120" height="170" fill="url(#pat_Dms)" stroke="black" stroke-width="1.5"/>
+<text x="220.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Dms</text>
+<text x="220.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">stratified diamicton</text>
+<rect x="300" y="12" width="120" height="170" fill="url(#pat_Dcm)" stroke="black" stroke-width="1.5"/>
+<text x="360.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Dcm</text>
+<text x="360.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">clast-rich diamicton</text>
+<rect x="440" y="12" width="120" height="170" fill="url(#pat_Gh)" stroke="black" stroke-width="1.5"/>
+<text x="500.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Gh</text>
+<text x="500.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">gravel</text>
+<rect x="580" y="12" width="120" height="170" fill="url(#pat_SGp)" stroke="black" stroke-width="1.5"/>
+<text x="640.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">SGp</text>
+<text x="640.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">planar cross-beds</text>
+<rect x="720" y="12" width="120" height="170" fill="url(#pat_SGt)" stroke="black" stroke-width="1.5"/>
+<text x="780.0" y="200" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">SGt</text>
+<text x="780.0" y="217" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">trough cross-beds</text>
+<rect x="20" y="240" width="120" height="170" fill="url(#pat_Sr)" stroke="black" stroke-width="1.5"/>
+<text x="80.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Sr</text>
+<text x="80.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">ripple lamination</text>
+<rect x="160" y="240" width="120" height="170" fill="url(#pat_Sh)" stroke="black" stroke-width="1.5"/>
+<text x="220.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Sh</text>
+<text x="220.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">laminated sand</text>
+<rect x="300" y="240" width="120" height="170" fill="url(#pat_Sm)" stroke="black" stroke-width="1.5"/>
+<text x="360.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Sm</text>
+<text x="360.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">massive sand</text>
+<rect x="440" y="240" width="120" height="170" fill="url(#pat_Gms)" stroke="black" stroke-width="1.5"/>
+<text x="500.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Gms</text>
+<text x="500.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">matrix-supported gravel</text>
+<rect x="580" y="240" width="120" height="170" fill="url(#pat_Cdm)" stroke="black" stroke-width="1.5"/>
+<text x="640.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Cdm</text>
+<text x="640.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">colluvium (soliflucted)</text>
+<rect x="720" y="240" width="120" height="170" fill="url(#pat_Fd)" stroke="black" stroke-width="1.5"/>
+<text x="780.0" y="428" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Fd</text>
+<text x="780.0" y="445" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">deformed / folded</text>
+<rect x="20" y="468" width="120" height="170" fill="url(#pat_SGc)" stroke="black" stroke-width="1.5"/>
+<text x="80.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">SGc</text>
+<text x="80.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">ice-contact (collapsed)</text>
+<rect x="160" y="468" width="120" height="170" fill="url(#pat_Fl)" stroke="black" stroke-width="1.5"/>
+<text x="220.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Fl</text>
+<text x="220.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">rhythmite / varve</text>
+<rect x="300" y="468" width="120" height="170" fill="url(#pat_Fm)" stroke="black" stroke-width="1.5"/>
+<text x="360.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Fm</text>
+<text x="360.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">massive mud</text>
+<rect x="440" y="468" width="120" height="170" fill="url(#pat_Em)" stroke="black" stroke-width="1.5"/>
+<text x="500.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">Em</text>
+<text x="500.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">loess</text>
+<rect x="580" y="468" width="120" height="170" fill="url(#pat_P)" stroke="black" stroke-width="1.5"/>
+<text x="640.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">P</text>
+<text x="640.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">peat / organic</text>
+<rect x="720" y="468" width="120" height="170" fill="url(#pat_R)" stroke="black" stroke-width="1.5"/>
+<text x="780.0" y="656" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="bold">R</text>
+<text x="780.0" y="673" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#444">bedrock</text>
 </svg>

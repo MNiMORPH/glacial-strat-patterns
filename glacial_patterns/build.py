@@ -64,31 +64,35 @@ def build(px=120, raster_w=240):
     print(f"built {len(rows)} facies -> svg/, png/, metadata/")
 
 
-def contact_sheet(rows, path=None):
-    """One labelled column segment per facies, side by side."""
+def contact_sheet(rows, path=None, ncols=6):
+    """Grid of labelled column segments, one per facies."""
     path = path or os.path.join(ROOT, "contact_sheet.svg")
-    W, H, gap, top = 120, 260, 22, 16
+    W, H, gx, gy, top, labh = 120, 170, 20, 16, 12, 42
+    cellh = H + labh
     defs, body = [], []
     for i, r in enumerate(rows):
         code = r["code"]
         fn = next(f for c, f, *_ in FACIES if c == code)
         _, d = pattern_defs(code, fn)
         defs.append(d)
-        x = gap + i * (W + gap)
-        body.append(f'<rect x="{x}" y="{top}" width="{W}" height="{H}" '
+        col, row = i % ncols, i // ncols
+        x = gx + col * (W + gx)
+        y = top + row * (cellh + gy)
+        body.append(f'<rect x="{x}" y="{y}" width="{W}" height="{H}" '
                     f'fill="url(#pat_{code})" stroke="black" stroke-width="1.5"/>')
-        body.append(f'<text x="{x+W/2}" y="{top+H+22}" text-anchor="middle" '
-                    f'font-family="sans-serif" font-size="16" font-weight="bold">{code}</text>')
-        body.append(f'<text x="{x+W/2}" y="{top+H+40}" text-anchor="middle" '
+        body.append(f'<text x="{x+W/2}" y="{y+H+18}" text-anchor="middle" '
+                    f'font-family="sans-serif" font-size="15" font-weight="bold">{code}</text>')
+        body.append(f'<text x="{x+W/2}" y="{y+H+35}" text-anchor="middle" '
                     f'font-family="sans-serif" font-size="11" fill="#444">{r["alias"]}</text>')
-    tw = gap + len(rows) * (W + gap)
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{tw}" height="{H+64}" '
-           f'viewBox="0 0 {tw} {H+64}">\n<defs>{"".join(defs)}</defs>\n'
+    nrows = (len(rows) + ncols - 1) // ncols
+    tw = gx + ncols * (W + gx)
+    th = top + nrows * (cellh + gy)
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{tw}" height="{th}" '
+           f'viewBox="0 0 {tw} {th}">\n<defs>{"".join(defs)}</defs>\n'
            f'<rect width="100%" height="100%" fill="white"/>\n' + "\n".join(body) +
            "\n</svg>\n")
     open(path, "w").write(svg)
-    png = path.replace(".svg", ".png")
-    rasterize(path, png, min(2400, tw * 2))
+    rasterize(path, path.replace(".svg", ".png"), min(1800, tw * 2))
 
 
 if __name__ == "__main__":
