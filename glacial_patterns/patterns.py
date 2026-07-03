@@ -181,21 +181,18 @@ def sand_trough_xbed(tile=96, seth=32, seed=2):            # SGt (festoon)
     span = tile // 2                       # trough width (divides tile)
     for si, y0 in enumerate(range(0, tile, seth)):
         off = (si % 2) * (span // 2)       # stagger troughs between cosets
-        yb = y0 + seth
-        # concave-up scour surface at the base of the coset
         for c in range(-1, 4):
             cx = c * span + off
-            els.append(f'<path d="M {cx-span/2:.1f},{y0} Q {cx:.1f},{yb+3:.1f} '
-                       f'{cx+span/2:.1f},{y0}" fill="none" stroke="#222" stroke-width="1.2"/>')
-            # nested foresets, asymmetric (steep down-current limb) = migration
-            for k in range(1, 6):
-                f = k / 6.0
-                rx = (span / 2) * (1 - 0.12 * k)
-                depth = (seth) * (1 - f) + 2
-                els.append(f'<path d="M {cx-rx:.1f},{y0+seth*0.12*k:.1f} '
-                           f'Q {cx+rx*0.35:.1f},{y0+depth:.1f} '
-                           f'{cx+rx:.1f},{y0+seth*0.05*k:.1f}" '
-                           f'fill="none" stroke="#6a6a6a" stroke-width="0.75"/>')
+            # concave-up scour scoop
+            els.append(f'<path d="M {cx-span/2:.1f},{y0} Q {cx:.1f},{y0+seth+3:.1f} '
+                       f'{cx+span/2:.1f},{y0}" fill="none" stroke="#222" stroke-width="1.1"/>')
+            # fanning internal foresets, tangential, verging down-current
+            for k in range(1, 5):
+                fr = k / 5.0
+                els.append(f'<path d="M {cx-span/2*(1-0.15*k):.1f},{y0+2:.1f} '
+                           f'Q {cx+FLOW*span*0.28:.1f},{y0+seth*(1-fr)+3:.1f} '
+                           f'{cx+span/2*(1-0.05*k):.1f},{y0+2:.1f}" '
+                           f'fill="none" stroke="#6a6a6a" stroke-width="0.7"/>')
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
@@ -218,15 +215,24 @@ def _xbed_mark(x, y, s, flow=FLOW):
     return m + ticks
 
 
-def sand_ripple(tile=52, seed=6):                          # Sr (ripple x-lam)
-    """Ripple cross-lamination: climbing trains of small down-current foreset
-    sets - the standard field-log ripple ornament."""
-    els = []
-    els.append(_sand_ground(tile, seed))   # sand lithology reads through
-    for row, y0 in enumerate(range(10, tile + 10, 11)):
-        climb = (row * 6) % 16             # up-current step per set = climbing
-        for cx in range(-4 + climb, tile + 16, 16):
-            els.append(_xbed_mark(cx, y0, 7))
+def sand_ripple(tile=54, seed=6):                          # Sr (ripple x-lam)
+    """Ripple cross-lamination: climbing trains of asymmetric current ripples -
+    gentle stoss, steep lee with foreset hachures on the down-current side (the
+    field-log 'climbing / current ripples' ornament). Assumes flow FLOW>0."""
+    els = [_sand_ground(tile, seed)]       # sand lithology reads through
+    wl = 18                                # ripple wavelength (divides tile)
+    for row, y0 in enumerate(range(6, tile + 6, 9)):
+        climb = (row * 6) % wl             # up-current step per set = climbing
+        for cx in range(-wl + climb, tile + wl, wl):
+            els.append(f'<path d="M {cx},{y0+4} C {cx+wl*0.5:.1f},{y0+3:.1f} '
+                       f'{cx+wl*0.75:.1f},{y0-3:.1f} {cx+wl*0.85:.1f},{y0-3:.1f} '
+                       f'C {cx+wl*0.9:.1f},{y0-3:.1f} {cx+wl*0.95:.1f},{y0+1:.1f} '
+                       f'{cx+wl:.1f},{y0+4:.1f}" fill="none" stroke="#3f3f3f" '
+                       f'stroke-width="1.0"/>')
+            for j in range(3):             # lee-side foreset hachures
+                hx = cx + wl * (0.72 + 0.06 * j)
+                els.append(f'<line x1="{hx:.1f}" y1="{y0-2:.1f}" x2="{hx-3:.1f}" '
+                           f'y2="{y0+3:.1f}" stroke="#8a8a8a" stroke-width="0.55"/>')
     return tile, f'<g clip-path="url(#clip{tile})">' + "\n".join(els) + "</g>"
 
 
@@ -299,11 +305,11 @@ def peat(tile=48, seed=10):                                # P (organic / peat)
 
 # ------------------------------------------------------- more glaciofluvial ---
 def sand_laminated(tile=48, seed=15):                      # Sh (plane beds)
-    """Horizontally laminated sand (upper-stage plane beds): near-parallel
-    laminae with slight, hand-drawn waviness and uneven thickness."""
-    els = [_wavy_polyline(y, tile, _wiggle(seed + y, tile, 0.5), "#666", 0.8)
-           for y in range(4, tile, 6)]
-    return tile, "\n".join(els)
+    """Horizontally laminated sand: straight, evenly spaced parallel laminae -
+    upper-stage plane beds (field-log 'planar bedding / planar laminations')."""
+    return tile, "\n".join(
+        f'<line x1="0" y1="{y}" x2="{tile}" y2="{y}" stroke="#666" stroke-width="0.8"/>'
+        for y in range(5, tile, 6))
 
 
 def gravel_matrix(tile=88, density=13, seed=17):           # Gms (debris flow)
