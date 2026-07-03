@@ -27,7 +27,10 @@ for code, top, bot in UNITS:
     ax.text(1.12, (top + bot) / 2, f"{code}  {resolve(code)['alias']}",
             va="center", fontsize=9)
 
-# ice-rafted dropstones in the varved interval
+# placed features: a subglacial boulder pavement capping the till, an
+# erosional contact at the base of the lake beds, and ice-rafted dropstones
+mpl.boulder_pavement(ax, 6.2, 0, 1)
+mpl.erosion_contact(ax, 3.2, 0, 1)
 mpl.dropstone(ax, 0.42, 2.7, 0.11)
 mpl.dropstone(ax, 0.66, 2.1, 0.08)
 
