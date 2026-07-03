@@ -154,9 +154,11 @@ def inkscape_palette(rows, path=None, ncols=6):
 # 'flow-left' 'flow-right' 'climb' 'settle' 'fabric' or None. Kept geologically
 # honest - foreset/ripple dip = transport; imbricate a-axes dip up-current.
 # caption lines separated by '|' (each rendered on its own row)
+# flow is left-to-right (down-current = +x); down-current arrows point right,
+# climbing ripples climb up-current (up-left).
 EXPLAIN = [
     ("Gh",  "Imbrication",       "disc clasts tilted;|a-axes dip up-current", "fabric"),
-    ("SGp", "Planar cross-beds", "foresets dip down-current,|tangential to the base", "flow-left"),
+    ("SGp", "Planar cross-beds", "foresets dip down-current,|tangential to the base", "flow-right"),
     ("SGt", "Trough cross-beds", "festoon scours:|migrating 3-D dunes", "flow-right"),
     ("Sr",  "Climbing ripples",  "migrate + aggrade;|ripples climb up-current", "climb"),
     ("Fl",  "Rhythmites",        "graded seasonal couplets;|suspension settling", "settle"),
@@ -164,11 +166,10 @@ EXPLAIN = [
 ]
 
 _ARROW = {                                 # (x1,y1,x2,y2) in a 0..W,0..H panel
-    "flow-left":  lambda W, H: (W * 0.72, H * 0.30, W * 0.28, H * 0.60),
-    "flow-right": lambda W, H: (W * 0.28, H * 0.30, W * 0.72, H * 0.40),
-    "climb":      lambda W, H: (W * 0.30, H * 0.74, W * 0.66, H * 0.28),
+    "flow-right": lambda W, H: (W * 0.28, H * 0.32, W * 0.72, H * 0.50),
+    "climb":      lambda W, H: (W * 0.70, H * 0.74, W * 0.34, H * 0.28),
     "settle":     lambda W, H: (W * 0.50, H * 0.22, W * 0.50, H * 0.74),
-    "fabric":     lambda W, H: (W * 0.30, H * 0.60, W * 0.70, H * 0.40),
+    "fabric":     lambda W, H: (W * 0.70, H * 0.60, W * 0.30, H * 0.40),
 }
 
 
